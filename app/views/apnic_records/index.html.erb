@@ -1,0 +1,37 @@
+<h1>Listing apnic_records</h1>
+
+<table>
+  <tr>
+    <th>Registry</th>
+    <th>Cc</th>
+    <th>Type</th>
+    <th>Start</th>
+    <th>Value</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Extensions</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @apnic_records.each do |apnic_record| %>
+  <tr>
+    <td><%= apnic_record.registry %></td>
+    <td><%= apnic_record.cc %></td>
+    <td><%= apnic_record.type %></td>
+    <td><%= apnic_record.start %></td>
+    <td><%= apnic_record.value %></td>
+    <td><%= apnic_record.date %></td>
+    <td><%= apnic_record.status %></td>
+    <td><%= apnic_record.extensions %></td>
+    <td><%= link_to 'Show', apnic_record %></td>
+    <td><%= link_to 'Edit', edit_apnic_record_path(apnic_record) %></td>
+    <td><%= link_to 'Destroy', apnic_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Apnic record', new_apnic_record_path %>

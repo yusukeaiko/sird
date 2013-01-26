@@ -1,0 +1,49 @@
+<%= form_for(@apnic_record) do |f| %>
+  <% if @apnic_record.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@apnic_record.errors.count, "error") %> prohibited this apnic_record from being saved:</h2>
+
+      <ul>
+      <% @apnic_record.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :registry %><br />
+    <%= f.text_field :registry %>
+  </div>
+  <div class="field">
+    <%= f.label :cc %><br />
+    <%= f.text_field :cc %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :start %><br />
+    <%= f.text_field :start %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br />
+    <%= f.number_field :value %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.text_field :date %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :extensions %><br />
+    <%= f.text_field :extensions %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

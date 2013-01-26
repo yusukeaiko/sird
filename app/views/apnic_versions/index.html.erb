@@ -1,0 +1,35 @@
+<h1>Listing apnic_versions</h1>
+
+<table>
+  <tr>
+    <th>Version</th>
+    <th>Registry</th>
+    <th>Serial</th>
+    <th>Records</th>
+    <th>Startdate</th>
+    <th>Enddate</th>
+    <th>Utcoffset</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @apnic_versions.each do |apnic_version| %>
+  <tr>
+    <td><%= apnic_version.version %></td>
+    <td><%= apnic_version.registry %></td>
+    <td><%= apnic_version.serial %></td>
+    <td><%= apnic_version.records %></td>
+    <td><%= apnic_version.startdate %></td>
+    <td><%= apnic_version.enddate %></td>
+    <td><%= apnic_version.UTCoffset %></td>
+    <td><%= link_to 'Show', apnic_version %></td>
+    <td><%= link_to 'Edit', edit_apnic_version_path(apnic_version) %></td>
+    <td><%= link_to 'Destroy', apnic_version, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Apnic version', new_apnic_version_path %>

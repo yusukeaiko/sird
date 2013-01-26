@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Version:</b>
+  <%= @apnic_version.version %>
+</p>
+
+<p>
+  <b>Registry:</b>
+  <%= @apnic_version.registry %>
+</p>
+
+<p>
+  <b>Serial:</b>
+  <%= @apnic_version.serial %>
+</p>
+
+<p>
+  <b>Records:</b>
+  <%= @apnic_version.records %>
+</p>
+
+<p>
+  <b>Startdate:</b>
+  <%= @apnic_version.startdate %>
+</p>
+
+<p>
+  <b>Enddate:</b>
+  <%= @apnic_version.enddate %>
+</p>
+
+<p>
+  <b>Utcoffset:</b>
+  <%= @apnic_version.UTCoffset %>
+</p>
+
+
+<%= link_to 'Edit', edit_apnic_version_path(@apnic_version) %> |
+<%= link_to 'Back', apnic_versions_path %>

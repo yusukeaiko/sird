@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  version: MyString
+  registry: MyString
+  serial: 1
+  records: 1
+  startdate: MyString
+  enddate: MyString
+  UTCoffset: MyString
+
+two:
+  version: MyString
+  registry: MyString
+  serial: 1
+  records: 1
+  startdate: MyString
+  enddate: MyString
+  UTCoffset: MyString

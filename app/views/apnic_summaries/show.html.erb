@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Registry:</b>
+  <%= @apnic_summary.registry %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @apnic_summary.type %>
+</p>
+
+<p>
+  <b>Count:</b>
+  <%= @apnic_summary.count %>
+</p>
+
+<p>
+  <b>Summary:</b>
+  <%= @apnic_summary.summary %>
+</p>
+
+
+<%= link_to 'Edit', edit_apnic_summary_path(@apnic_summary) %> |
+<%= link_to 'Back', apnic_summaries_path %>

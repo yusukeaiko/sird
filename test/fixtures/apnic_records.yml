@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  registry: MyString
+  cc: MyString
+  type: 
+  start: MyString
+  value: 1
+  date: MyString
+  status: MyString
+  extensions: MyString
+
+two:
+  registry: MyString
+  cc: MyString
+  type: 
+  start: MyString
+  value: 1
+  date: MyString
+  status: MyString
+  extensions: MyString
