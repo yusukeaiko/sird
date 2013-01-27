@@ -6,7 +6,7 @@ class CreateApnicRecords < ActiveRecord::Migration
       t.string :type
       t.string :start
       t.integer :value
-      t.string :date
+      t.date :date
       t.string :status
       t.string :extensions
 

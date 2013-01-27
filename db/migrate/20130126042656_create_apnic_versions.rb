@@ -3,10 +3,10 @@ class CreateApnicVersions < ActiveRecord::Migration
     create_table :apnic_versions do |t|
       t.string :version
       t.string :registry
-      t.integer :serial
+      t.string :serial
       t.integer :records
-      t.string :startdate
-      t.string :enddate
+      t.date :startdate
+      t.date :enddate
       t.string :UTCoffset
 
       t.timestamps
