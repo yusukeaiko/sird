@@ -1,27 +1,25 @@
-<h1>ipl</h1>
+<section id="info">
+  <dl>
+    <dt>Data Status:</dt>
+    <dd>Version: <%= @versions.version %></dd>
+    <dd>Serial: <%= @versions.serial %></dd>
+    <dd>Update: <%= @versions.enddate %></dd>
+  </dl>
 
-<du>
-  <dh>Data Status:</dh>
-  <dd>
-    Version: <%= @versions.version %><br />
-    Serial: <%= @versions.serial %><br />
-    Update: <%= @versions.enddate %><br />
-  </dd>
-</du>
-
-<du>
-  <dh>Include Data:</dh>
-  <dd>
+  <dl>
+    <dt>Include Data Count:</dt>
     <% @summaries.each do |sum| %>
-    <%= sum.data_type %>: <%= sum.count %><br />
+    <dd><%= sum.data_type %>: <%= sum.count %></dd>
     <% end %>
-  </dd>
-</du>
+  </dl>
+</section>
 
-<%= form_for(@records, :url => {:controller => 'apnic_records', :action => 'index.json'}, :html => {:class => 'search_apnic_record', :id => 'search_apnic_record'}, :remote => true) do |f| %>
-<%= f.text_field :start %>
-<%= f.submit "Search" %>
-<% end %>
+<section id="search">
+  <%= form_for(@records, :url => {:controller => 'apnic_records', :action => 'index.json'}, :html => {:class => 'search_apnic_record', :id => 'search_apnic_record'}, :remote => true) do |f| %>
+  <label>IP Address: <%= f.text_field :start %></label>
+  <%= f.submit "Search" %>
+  <% end %>
+</section>
 
-<div id="apnic_records">
-</div>
+<section id="data">
+</section>

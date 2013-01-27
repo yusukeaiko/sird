@@ -1,3 +1,44 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+section {
+  padding: 5px 0 5px 0;
+  float: left;
+  clear: both;
+}
+
+section#info dl {
+  width: 150px;
+  margin-right: 10px;
+  font-size: small;
+  float: left;
+  clear: right;
+}
+section#info dl dt {
+  height: 1.4em;
+  font-weight: bold;
+}
+section#info dl dd {
+  height: 1.2em;
+}
+
+section#data table {
+  border-spacing: 0;
+  empty-sell: show;
+}
+section#data table tr:hover {
+  background-color: mistyrose;
+}
+section#data table tr th,
+section#data table tr td {
+  padding: 5px;
+  border: 1px solid lightgray;
+  color: black;
+}
+section#data table tr th {
+  text-align: center;
+  background-color: lightsteelblue;
+}
+section#data table tr td {
+}

@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <title>Ipl</title>
+  <meta charset="utf-8">
+  <title>IP Address List</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<header>
+  <h1>IP Address List</h1>
+</header>
+
 <%= yield %>
+
+<footer>
+  &copy;&nbsp;<%= Time.now.year %>
+</footer>
 
 </body>
 </html>
