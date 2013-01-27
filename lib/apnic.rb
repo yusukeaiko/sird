@@ -1,7 +1,8 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 # APNICから最新のIPアドレスリストを取得し、データベースを更新するバッチ処理プログラム
 require 'open-uri'
 require 'csv'
+require 'ipaddr'
 
 class Apnic
   # IPアドレスリストが格納されているAPNICのFTPサイトURL
@@ -18,6 +19,7 @@ class Apnic
     end
   end
 
+  # APNICからファイルをダウンロードし、一時ディレクトリに格納
   def self.download()
     ret = false
     open(APNIC_FILE, 'w') {|file|
@@ -26,6 +28,7 @@ class Apnic
         ret = true
       }
     }
+    
     return ret
   end
 
@@ -76,10 +79,10 @@ class Apnic
 
   def self.set_summary(data = {})
     row = {
-      :registry => data[0],
-      :type     => data[2],
-      :count    => data[4].to_i,
-      :summary  => data[5]
+      :registry  => data[0],
+      :data_type => data[2],
+      :count     => data[4].to_i,
+      :summary   => data[5]
     }
     apnic_summary = ApnicSummary.new(row)
     
@@ -91,15 +94,27 @@ class Apnic
     row = {
       :registry   => data[0],
       :cc         => data[1],
-      :type       => data[2],
+      :data_type       => data[2],
       :start      => data[3],
       :value      => data[4].to_i,
       :date       => (data[5].length == 8 ? Date.strptime(data[5], "%Y%m%d").to_s : data[5]),
       :status     => data[6],
       :extensions => data[7],
+      :start_addr_dec => nil,
+      :end_addr_dec => nil
     }
-    apnic_record = ApnicRecord.new(row)
+
+    if row[:start].length > 0 then
+      case row[:data_type]
+      when 'ipv4'
+        row[:start_addr_dec] = IPAddr.new(row[:start]).to_i
+        row[:end_addr_dec] = IPAddr.new(row[:start]).to_i + row[:value]
+      when 'ipv6'
+        row[:start_addr_dec] = IPAddr.new(row[:start]).to_i
+      end
+    end
     
+    apnic_record = ApnicRecord.new(row)
     if apnic_record.save then
     end
   end

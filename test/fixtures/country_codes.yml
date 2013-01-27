@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  country: MyString
+  code_2: MyString
+  code_3: MyString
+  country_ja: MyString
+  area: MyString
+  type: 
+
+two:
+  country: MyString
+  code_2: MyString
+  code_3: MyString
+  country_ja: MyString
+  area: MyString
+  type: 

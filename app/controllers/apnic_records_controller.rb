@@ -1,15 +1,16 @@
+# -*- coding: utf-8 -*-
 class ApnicRecordsController < ApplicationController
   # GET /apnic_records
   # GET /apnic_records.json
   def index
-    @apnic_records = ApnicRecord.all
+    @apnic_records = ApnicRecord.search(params[:apnic_record][:start])
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @apnic_records }
     end
   end
-
+=begin
   # GET /apnic_records/1
   # GET /apnic_records/1.json
   def show
@@ -80,4 +81,5 @@ class ApnicRecordsController < ApplicationController
       format.json { head :no_content }
     end
   end
+=end
 end

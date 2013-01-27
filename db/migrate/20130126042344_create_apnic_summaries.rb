@@ -2,7 +2,7 @@ class CreateApnicSummaries < ActiveRecord::Migration
   def change
     create_table :apnic_summaries do |t|
       t.string :registry
-      t.string :type
+      t.string :data_type
       t.integer :count
       t.string :summary
 

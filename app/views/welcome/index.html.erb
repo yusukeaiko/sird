@@ -1,2 +1,27 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<h1>ipl</h1>
+
+<du>
+  <dh>Data Status:</dh>
+  <dd>
+    Version: <%= @versions.version %><br />
+    Serial: <%= @versions.serial %><br />
+    Update: <%= @versions.enddate %><br />
+  </dd>
+</du>
+
+<du>
+  <dh>Include Data:</dh>
+  <dd>
+    <% @summaries.each do |sum| %>
+    <%= sum.data_type %>: <%= sum.count %><br />
+    <% end %>
+  </dd>
+</du>
+
+<%= form_for(@records, :url => {:controller => 'apnic_records', :action => 'index.json'}, :html => {:class => 'search_apnic_record', :id => 'search_apnic_record'}, :remote => true) do |f| %>
+<%= f.text_field :start %>
+<%= f.submit "Search" %>
+<% end %>
+
+<div id="apnic_records">
+</div>

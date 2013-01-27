@@ -1,2 +1,0 @@
-module ApnicSummariesHelper
-end
