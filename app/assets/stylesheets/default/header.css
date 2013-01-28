@@ -1,6 +1,12 @@
 header {
-    padding: 10px 0 10px 0;
-    margin: 0;
-    float: none;
-    clear: both;
+  padding: 10px 0 10px 0;
+  margin: 0;
+  float: none;
+  clear: both;
+}
+
+header div.description {
+  padding: 6px 0 0 0;
+  font-size: medium; 
+  font-weight: normal;
 }

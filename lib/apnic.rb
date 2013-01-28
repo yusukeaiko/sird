@@ -108,9 +108,12 @@ class Apnic
       case row[:data_type]
       when 'ipv4'
         row[:start_addr_dec] = IPAddr.new(row[:start]).to_i
-        row[:end_addr_dec] = IPAddr.new(row[:start]).to_i + row[:value]
+        row[:end_addr_dec] = IPAddr.new(row[:start]).to_i + row[:value] - 1
       when 'ipv6'
         row[:start_addr_dec] = IPAddr.new(row[:start]).to_i
+      when 'asn'
+        row[:start_addr_dec] = row[:start].to_i
+        row[:end_addr_dec] = row[:start].to_i + row[:value] - 1
       end
     end
     

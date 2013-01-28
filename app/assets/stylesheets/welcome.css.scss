@@ -23,6 +23,10 @@ section#info dl dd {
   height: 1.2em;
 }
 
+section#search p.description {
+  font-size: x-small;
+}
+
 section#data table {
   border-spacing: 0;
   empty-cell: show;
@@ -40,5 +44,6 @@ section#data table tr th {
   text-align: center;
   background-color: lightsteelblue;
 }
-section#data table tr td {
+section#data table tr td img {
+  float: left;
 }

@@ -12,6 +12,28 @@
     <dd><%= sum.data_type %>: <%= sum.count %></dd>
     <% end %>
   </dl>
+  
+  <dl>
+    <dt>Original Data Links:</dt>
+    <dd style="width:60px;float:left;">
+      <a href="http://www.iana.org/" title="Internet Assigned Numbers Authority" target="_blank">IANA</a>
+    </dd>
+    <dd style="width:60px;float:left;">
+      <a href="https://www.arin.net/" title="American Registry for Internet Numbers" target="_blank">ARIN</a>
+    </dd>
+    <dd style="width:60px;float:left;">
+      <a href="http://www.ripe.net/" title="RIPE Network Coordination Centre" target="_blank">RIPE NCC</a>
+    </dd>
+    <dd style="width:60px;float:left;">
+      <a href="http://www.apnic.net/" title="Asia-Pacific Network Information Centre " target="_blank">APNIC</a>
+    </dd>
+    <dd style="width:60px;float:left;">
+      <a href="http://www.lacnic.net/" title="Latin American and Caribbean Internet Address Registry" target="_blank">LACNIC</a>
+    </dd>
+    <dd style="width:60px;float:left;">
+      <a href="http://www.afrinic.net/" title="African Network Information Centre" target="_blank">AfriNIC</a>
+    </dd>
+  </dl>
 </section>
 
 <section id="search">
@@ -19,6 +41,8 @@
   <label>Keyword: <%= f.text_field :start %></label>
   <%= f.submit "Search" %>
   <% end %>
+  <p class="description">IPv4、ASNコードを入力可能です。</p>
+  <p class="description">複数のIPアドレスをカンマ区切りで複数入力できます。</p>
 </section>
 
 <section id="ads">

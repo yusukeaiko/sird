@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>Statistics on Internet Resource Distribution</title>
+  <meta name="robots" content="nofollow" />
+  <meta name="keywords" content="IP Address,IPアドレス,RIR,Country Code,国コード,statistics" />
+  <meta name="description" content="IPアドレスや国コードからRIRへの登録状況を確認できます。" />
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -11,6 +14,9 @@
 
 <header>
   <h1>Statistics on Internet Resource Distribution</h1>
+  <div class="description">
+    <p>IPアドレスや国コードからRegional Internet Registryへの登録状況を確認できます。</p>
+  </div>
 </header>
 
 <%= yield %>
