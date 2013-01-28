@@ -18,24 +18,27 @@ $ ->
 
 writeData = (data) ->
   if data.length > 0
-    htmlcode = '<table>'
+    htmlcode = '<table id="sirdtable">'
+    htmlcode += '<thead>'
     htmlcode += '<tr>'
-    htmlcode += '<th>入力値</th>'
-    htmlcode += '<th>開始アドレス</th>'
-    htmlcode += '<th>アドレス数</th>'
-    htmlcode += '<th>国コード</th>'
-    htmlcode += '<th>地域</th>'
-    htmlcode += '<th>国名</th>'
-    htmlcode += '<th>タイプ</th>'
-    htmlcode += '<th>ステータス</th>'
-    htmlcode += '<th>レジストラ</th>'
-    htmlcode += '<th>レジストラ払出日</th>'
+    htmlcode += '<th data-sort="string">入力値</th>'
+    htmlcode += '<th data-sort="string">開始アドレス</th>'
+    htmlcode += '<th data-sort="integer">アドレス数</th>'
+    htmlcode += '<th data-sort="string">国コード</th>'
+    htmlcode += '<th data-sort="string">地域</th>'
+    htmlcode += '<th data-sort="string">国名</th>'
+    htmlcode += '<th data-sort="string">タイプ</th>'
+    htmlcode += '<th data-sort="string">ステータス</th>'
+    htmlcode += '<th data-sort="string">レジストラ</th>'
+    htmlcode += '<th data-sort="string">レジストラ払出日</th>'
     htmlcode += '</tr>'
+    htmlcode += '</thead>'
+    htmlcode += '<tbody>'
     for row, i in data
       htmlcode += '<tr>'
       htmlcode += "<td>#{row.input_value}</td>"
       htmlcode += "<td>#{row.start}</td>"
-      htmlcode += "<td>#{row.value}</td>"
+      htmlcode += "<td style=\"text-align:right;\">#{row.value}</td>"
       htmlcode += "<td>#{row.cc}</td>"
       htmlcode += "<td>#{row.area}</td>"
       if row.country.length > 0
@@ -47,7 +50,9 @@ writeData = (data) ->
       htmlcode += "<td>#{row.registry}</td>"
       htmlcode += "<td>#{row.date}</td>"
       htmlcode += '</tr>'
+    htmlcode += '</tbody>'
     htmlcode += '</table>'
     $('#data').html(htmlcode)
+    $('#sirdtable').stupidtable()
   else
     $('#data').html('<p>No Data.</p>')
