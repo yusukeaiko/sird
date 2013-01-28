@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  $('#search_apnic_record')
+  $('#search_statistics_record')
   # .bind 'ajax:beforeSend', (event, data) ->
   #   alert 'ajax:beforeSend'
   .bind 'ajax:success', (event, data) ->

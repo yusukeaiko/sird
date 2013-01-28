@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ApnicSummaryTest < ActiveSupport::TestCase
+class StatisticsRecordTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

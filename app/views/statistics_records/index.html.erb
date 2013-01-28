@@ -1,0 +1,41 @@
+<h1>Listing statistics_records</h1>
+
+<table>
+  <tr>
+    <th>Registry</th>
+    <th>Cc</th>
+    <th>Data type</th>
+    <th>Start</th>
+    <th>Value</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Extensions</th>
+    <th>Start addr dec</th>
+    <th>End addr dec</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @statistics_records.each do |statistics_record| %>
+  <tr>
+    <td><%= statistics_record.registry %></td>
+    <td><%= statistics_record.cc %></td>
+    <td><%= statistics_record.data_type %></td>
+    <td><%= statistics_record.start %></td>
+    <td><%= statistics_record.value %></td>
+    <td><%= statistics_record.date %></td>
+    <td><%= statistics_record.status %></td>
+    <td><%= statistics_record.extensions %></td>
+    <td><%= statistics_record.start_addr_dec %></td>
+    <td><%= statistics_record.end_addr_dec %></td>
+    <td><%= link_to 'Show', statistics_record %></td>
+    <td><%= link_to 'Edit', edit_statistics_record_path(statistics_record) %></td>
+    <td><%= link_to 'Destroy', statistics_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Statistics record', new_statistics_record_path %>

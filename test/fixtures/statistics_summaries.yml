@@ -2,12 +2,12 @@
 
 one:
   registry: MyString
-  type: 
+  data_type: MyString
   count: 1
   summary: MyString
 
 two:
   registry: MyString
-  type: 
+  data_type: MyString
   count: 1
   summary: MyString

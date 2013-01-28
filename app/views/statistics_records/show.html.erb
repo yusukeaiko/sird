@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Registry:</b>
+  <%= @statistics_record.registry %>
+</p>
+
+<p>
+  <b>Cc:</b>
+  <%= @statistics_record.cc %>
+</p>
+
+<p>
+  <b>Data type:</b>
+  <%= @statistics_record.data_type %>
+</p>
+
+<p>
+  <b>Start:</b>
+  <%= @statistics_record.start %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @statistics_record.value %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @statistics_record.date %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @statistics_record.status %>
+</p>
+
+<p>
+  <b>Extensions:</b>
+  <%= @statistics_record.extensions %>
+</p>
+
+<p>
+  <b>Start addr dec:</b>
+  <%= @statistics_record.start_addr_dec %>
+</p>
+
+<p>
+  <b>End addr dec:</b>
+  <%= @statistics_record.end_addr_dec %>
+</p>
+
+
+<%= link_to 'Edit', edit_statistics_record_path(@statistics_record) %> |
+<%= link_to 'Back', statistics_records_path %>

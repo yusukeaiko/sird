@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 require 'ipaddr'
 
-class ApnicRecord < ActiveRecord::Base
-  attr_accessible :cc, :date, :extensions, :registry, :start, :status, :data_type, :value, :start_addr_dec, :end_addr_dec
-
+class StatisticsRecord < ActiveRecord::Base
+  attr_accessible :cc, :data_type, :date, :end_addr_dec, :extensions, :registry, :start, :start_addr_dec, :status, :value
+  
   def self.search(inaddr)
     data = []
     dataType = ''

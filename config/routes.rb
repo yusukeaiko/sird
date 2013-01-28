@@ -1,14 +1,6 @@
-Ipl::Application.routes.draw do
+Sird::Application.routes.draw do
   get "welcome/index"
-
-  resources :apnic_versions
-
-
-  resources :apnic_records
-
-
-  resources :apnic_summaries
-
+  resources :statistics_records
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

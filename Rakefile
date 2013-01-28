@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Ipl::Application.load_tasks
+Sird::Application.load_tasks

@@ -1,10 +1,10 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 class WelcomeController < ApplicationController
   def index
     registry = 'apnic'
-    @versions = ApnicVersion.find_by_registry(registry)
-    @summaries = ApnicSummary.all
-    @records = ApnicRecord.new
+    @versions = StatisticsVersion.find_by_registry(registry)
+    @summaries = StatisticsSummary.all
+    @records = StatisticsRecord.new
     
 =begin
     @data = ApnicVersion.find(params[:id])

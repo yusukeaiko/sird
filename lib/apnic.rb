@@ -14,9 +14,9 @@ class Apnic
   APNIC_FILE = Rails.root.join(TMP_DIR + FILE).to_s
   
   def self.execute()
-    if download() then
+    # if download() then
       update()
-    end
+    # end
   end
 
   # APNICからファイルをダウンロードし、一時ディレクトリに格納
@@ -33,9 +33,9 @@ class Apnic
   end
 
   def self.update()
-    ApnicRecord.delete_all
-    ApnicVersion.delete_all
-    ApnicSummary.delete_all
+    StatisticsRecord.delete_all
+    StatisticsVersion.delete_all
+    StatisticsSummary.delete_all
     
     CSV.foreach(APNIC_FILE, {:col_sep => '|', :skip_blanks => true}) {|row|
       if  8 >= row.length && row.length >= 5 then
@@ -71,9 +71,9 @@ class Apnic
       :UTCoffset => data[6].to_s.strip
     }
     
-    apnic_version = ApnicVersion.new(row)
+    version = StatisticsVersion.new(row)
     
-    if apnic_version.save then
+    if version.save then
     end
   end
 
@@ -84,9 +84,9 @@ class Apnic
       :count     => data[4].to_i,
       :summary   => data[5]
     }
-    apnic_summary = ApnicSummary.new(row)
+    summary = StatisticsSummary.new(row)
     
-    if apnic_summary.save then
+    if summary.save then
     end
   end
 
@@ -114,8 +114,8 @@ class Apnic
       end
     end
     
-    apnic_record = ApnicRecord.new(row)
-    if apnic_record.save then
+    record = StatisticsRecord.new(row)
+    if record.save then
     end
   end
 end

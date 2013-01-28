@@ -3,19 +3,23 @@
 one:
   registry: MyString
   cc: MyString
-  type: 
+  data_type: MyString
   start: MyString
   value: 1
   date: MyString
   status: MyString
-  extensions: MyString
+  extensions: 
+  start_addr_dec: 
+  end_addr_dec: 1
 
 two:
   registry: MyString
   cc: MyString
-  type: 
+  data_type: MyString
   start: MyString
   value: 1
   date: MyString
   status: MyString
-  extensions: MyString
+  extensions: 
+  start_addr_dec: 
+  end_addr_dec: 1

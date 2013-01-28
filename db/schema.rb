@@ -11,43 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130127051011) do
-
-  create_table "apnic_records", :force => true do |t|
-    t.string   "registry"
-    t.string   "cc"
-    t.string   "data_type"
-    t.string   "start"
-    t.integer  "value"
-    t.date     "date"
-    t.string   "status"
-    t.string   "extensions"
-    t.integer  "start_addr_dec"
-    t.integer  "end_addr_dec"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  create_table "apnic_summaries", :force => true do |t|
-    t.string   "registry"
-    t.string   "data_type"
-    t.integer  "count"
-    t.string   "summary"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "apnic_versions", :force => true do |t|
-    t.string   "version"
-    t.string   "registry"
-    t.string   "serial"
-    t.integer  "records"
-    t.date     "startdate"
-    t.date     "enddate"
-    t.string   "UTCoffset"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130128022638) do
 
   create_table "country_codes", :force => true do |t|
     t.string   "country"
@@ -56,6 +20,42 @@ ActiveRecord::Schema.define(:version => 20130127051011) do
     t.string   "country_ja"
     t.string   "area"
     t.string   "code_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "statistics_records", :force => true do |t|
+    t.string   "registry"
+    t.string   "cc"
+    t.string   "data_type"
+    t.string   "start"
+    t.integer  "value"
+    t.string   "date"
+    t.string   "status"
+    t.string   "extensions"
+    t.integer  "start_addr_dec"
+    t.integer  "end_addr_dec"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "statistics_summaries", :force => true do |t|
+    t.string   "registry"
+    t.string   "data_type"
+    t.integer  "count"
+    t.string   "summary"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "statistics_versions", :force => true do |t|
+    t.string   "version"
+    t.string   "registry"
+    t.integer  "serial"
+    t.integer  "records"
+    t.string   "startdate"
+    t.string   "enddate"
+    t.string   "UTCoffset"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
