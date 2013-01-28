@@ -23,7 +23,7 @@ section#info dl dd {
   height: 1.2em;
 }
 
-section#search p.description {
+Section#search p.description {
   font-size: x-small;
 }
 
@@ -47,3 +47,18 @@ section#data table tr th {
 section#data table tr td img {
   float: left;
 }
+
+section#ref dl {
+  font-size: small;
+  float: left;
+}
+section#ref dl dt {
+  padding-right: 5px;
+  font-weight: bold;
+  float: left
+}
+section#ref dl dd {
+  padding-right: 5px;
+  float: left
+}
+

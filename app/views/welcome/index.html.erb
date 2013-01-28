@@ -1,39 +1,20 @@
 <section id="info">
+  <% @versions.each_with_index do |ver, i| %>
   <dl>
-    <dt>Data Status:</dt>
-    <dd>Version: <%= @versions.version %></dd>
-    <dd>Serial: <%= @versions.serial %></dd>
-    <dd>Update: <%= @versions.enddate %></dd>
+    <dt><%= ver.registry.upcase %> Data Status:</dt>
+    <dd>Version: <%= ver.version %></dd>
+    <dd>Serial: <%= ver.serial %></dd>
+    <dd>Update: <%= ver.enddate %></dd>
   </dl>
-
+  <% end %>
+<% if false %>
   <dl>
     <dt>Include Data Count:</dt>
     <% @summaries.each do |sum| %>
     <dd><%= sum.data_type %>: <%= sum.count %></dd>
     <% end %>
   </dl>
-  
-  <dl>
-    <dt>Original Data Links:</dt>
-    <dd style="width:60px;float:left;">
-      <a href="http://www.iana.org/" title="Internet Assigned Numbers Authority" target="_blank">IANA</a>
-    </dd>
-    <dd style="width:60px;float:left;">
-      <a href="https://www.arin.net/" title="American Registry for Internet Numbers" target="_blank">ARIN</a>
-    </dd>
-    <dd style="width:60px;float:left;">
-      <a href="http://www.ripe.net/" title="RIPE Network Coordination Centre" target="_blank">RIPE NCC</a>
-    </dd>
-    <dd style="width:60px;float:left;">
-      <a href="http://www.apnic.net/" title="Asia-Pacific Network Information Centre " target="_blank">APNIC</a>
-    </dd>
-    <dd style="width:60px;float:left;">
-      <a href="http://www.lacnic.net/" title="Latin American and Caribbean Internet Address Registry" target="_blank">LACNIC</a>
-    </dd>
-    <dd style="width:60px;float:left;">
-      <a href="http://www.afrinic.net/" title="African Network Information Centre" target="_blank">AfriNIC</a>
-    </dd>
-  </dl>
+<% end %>
 </section>
 
 <section id="search">
@@ -60,4 +41,16 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </section>
 
 <section id="data">
+</section>
+
+<section id="ref">
+  <dl>
+    <dt>Original Data Links:</dt>
+    <dd><a href="http://www.iana.org/" title="Internet Assigned Numbers Authority" target="_blank">IANA</a></dd>
+    <dd><a href="https://www.arin.net/" title="American Registry for Internet Numbers" target="_blank">ARIN</a></dd>
+    <dd><a href="http://www.ripe.net/" title="RIPE Network Coordination Centre" target="_blank">RIPE NCC</a></dd>
+    <dd><a href="http://www.apnic.net/" title="Asia-Pacific Network Information Centre " target="_blank">APNIC</a></dd>
+    <dd><a href="http://www.lacnic.net/" title="Latin American and Caribbean Internet Address Registry" target="_blank">LACNIC</a></dd>
+    <dd><a href="http://www.afrinic.net/" title="African Network Information Centre" target="_blank">AfriNIC</a></dd>
+  </dl>
 </section>

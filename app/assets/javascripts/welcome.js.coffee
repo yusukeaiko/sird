@@ -2,6 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+$(document).ready ->
+  $('#statistics_record_start').focus()
+
 $ ->
   $('#search_statistics_record')
   .bind 'ajax:beforeSend', (event, data) ->
@@ -25,8 +28,8 @@ writeData = (data) ->
     htmlcode += '<th>国名</th>'
     htmlcode += '<th>タイプ</th>'
     htmlcode += '<th>ステータス</th>'
-    htmlcode += '<th>管轄</th>'
-    htmlcode += '<th>APNIC払出日</th>'
+    htmlcode += '<th>レジストラ</th>'
+    htmlcode += '<th>レジストラ払出日</th>'
     htmlcode += '</tr>'
     for row, i in data
       htmlcode += '<tr>'
@@ -36,7 +39,7 @@ writeData = (data) ->
       htmlcode += "<td>#{row.cc}</td>"
       htmlcode += "<td>#{row.area}</td>"
       if row.country.length > 0
-        htmlcode += "<td><img alt=\"flag\" src=\"/assets/flags/shiny/24/#{row.country}.png\" />#{row.country}(#{row.country_ja})</td>"
+        htmlcode += "<td><div style=\"width:24px;\"><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.country.replace(' ','-')}.png\" /></div>#{row.country}(#{row.country_ja})</td>"
       else
         htmlcode += "<td>#{row.country}</td>"
       htmlcode += "<td>#{row.data_type}</td>"

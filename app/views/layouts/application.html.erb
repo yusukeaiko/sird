@@ -6,7 +6,11 @@
   <meta name="robots" content="nofollow" />
   <meta name="keywords" content="IP Address,IPアドレス,RIR,Country Code,国コード,statistics" />
   <meta name="description" content="IPアドレスや国コードからRIRへの登録状況を確認できます。" />
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->  <%= stylesheet_link_tag    "application", :media => "all" %>
+
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -21,8 +25,45 @@
 
 <%= yield %>
 
+<section id="sns">
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://sird.xay.jp/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+<!-- /Facebook -->
+
+<!-- Google+ -->
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="medium"></div>
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+<!-- /Google+ -->
+
+<!-- Hatena Bookmark -->
+<a href="http://b.hatena.ne.jp/entry/http://sird.xay.jp/" class="hatena-bookmark-button" data-hatena-bookmark-title="Statistics on Internet Resource Distribution" data-hatena-bookmark-layout="standard-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<!-- /Hatena Bookmark -->
+
+<!-- Twitter -->
+  <a href="https://twitter.com/VitSymty" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @VitSymty</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<!-- /Twitter -->
+</section>
+
 <footer>
-  &copy;&nbsp;<%= Time.now.year %>
+  &copy;&nbsp;<%= Time.now.year %>&nbsp;
+  <a href="https://twitter.com/VitSymty" title="管理者のつぶやき" target="_blank">VitSymty@twitter</a>
 </footer>
 
 <script type="text/javascript">

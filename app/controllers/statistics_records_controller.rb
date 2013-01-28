@@ -3,10 +3,17 @@ class StatisticsRecordsController < ApplicationController
   # GET /statistics_records
   # GET /statistics_records.json
   def index
-    @statistics_records = StatisticsRecord.search(params[:statistics_record][:start])
+    val = ''
+    if params.key?(:start) then
+      val = params[:start]
+    elsif params.key?(:statistics_record) then
+      val = params[:statistics_record][:start]
+    end
+
+    @statistics_records = StatisticsRecord.search(val)
 
     respond_to do |format|
-      format.html # index.html.erb
+      # format.html # index.html.erb
       format.json { render json: @statistics_records }
     end
   end
