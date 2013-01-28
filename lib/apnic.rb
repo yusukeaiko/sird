@@ -14,9 +14,9 @@ class Apnic
   APNIC_FILE = Rails.root.join(TMP_DIR + FILE).to_s
   
   def self.execute()
-    # if download() then
+    if download() then
       update()
-    # end
+    end
   end
 
   # APNICからファイルをダウンロードし、一時ディレクトリに格納
