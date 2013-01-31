@@ -9,8 +9,8 @@ module Iana
 
   def self.execute()
     registry = Registry.all()
-    # if self::Download.execute(registry) then
+    if self::Download.execute(registry) then
       self::Update.execute(registry)
-    # end
+    end
   end
 end

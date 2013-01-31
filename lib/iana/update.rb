@@ -18,7 +18,7 @@ module Iana
 
       CSV.foreach(tmpfile, {:col_sep => '|', :skip_blanks => true}) {|row|
         if (6..8).include?(row.length) && row[0].strip =~ /^[^#].*$/ then
-          row.each_with_index {|elem, i| row[i] = (elem.to_s.strip.length == 0) ? nil : elem.to_s.strip}
+          row.each_with_index {|elem, i| row[i] = (elem != nil && elem.to_s.strip.length == 0) ? nil : elem.to_s.strip}
 
           case row.length
           when 6
