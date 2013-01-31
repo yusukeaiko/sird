@@ -19,25 +19,9 @@
 
 <section id="search">
   <%= form_for(@records, :url => {:controller => 'statistics_records', :action => 'index.json'}, :html => {:class => 'search_statistics_record', :id => 'search_statistics_record'}, :remote => true) do |f| %>
-  <label>Keyword: <%= f.text_field :start %></label>
+  <label>Keyword: <%= f.text_field :start, :title => 'キーワードはIPv4、ASNコード、カントリーコード(ISO3166-1 alpha-2)を入力可能です。<br />複数のキーワードをカンマ区切りで複数入力できます。'%></label>
   <%= f.submit "Search" %>
   <% end %>
-  <p class="description">キーワードはIPv4、ASNコード、カントリーコード(ISO3166-1 alpha-2)を入力可能です。</p>
-  <p class="description">複数のキーワードをカンマ区切りで複数入力できます。</p>
-</section>
-
-<section id="ads">
-<script type="text/javascript"><!--
-google_ad_client = "ca-pub-6399662930969394";
-/* default@sird.xay.jp */
-google_ad_slot = "5341249934";
-google_ad_width = 728;
-google_ad_height = 15;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
 </section>
 
 <section id="data">

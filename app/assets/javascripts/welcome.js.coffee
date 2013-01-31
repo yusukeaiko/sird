@@ -8,7 +8,7 @@ $(document).ready ->
 $ ->
   $('#search_statistics_record')
   .bind 'ajax:beforeSend', (event, data) ->
-    $('#data').html('<p>Processing...</p>')
+    $('#data').html('<div class="circle_outside"></div><div class="circle_inside"></div>')
   .bind 'ajax:success', (event, data) ->
     writeData(data)
   # .bind 'ajax:error', (event, data) ->
@@ -17,6 +17,7 @@ $ ->
   #   alert 'ajax:complete'
 
 writeData = (data) ->
+  cnt = 0
   if data.length > 0
     htmlcode = '<table id="sirdtable">'
     htmlcode += '<thead>'
@@ -42,7 +43,7 @@ writeData = (data) ->
       htmlcode += "<td>#{row.cc}</td>"
       htmlcode += "<td>#{row.area}</td>"
       if row.country != null && row.country.length > 0
-        htmlcode += "<td><div style=\"width:24px;\"><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.country.replace(' ','-')}.png\" /></div>#{row.country}(#{row.country_ja})</td>"
+        htmlcode += "<td><div style=\"padding:0;margin:0;width:24px;\"><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.country.replace(' ','-')}.png\" /></div>#{row.country}(#{row.country_ja})</td>"
       else
         htmlcode += "<td>#{row.country}</td>"
       htmlcode += "<td>#{row.data_type}</td>"
@@ -50,9 +51,11 @@ writeData = (data) ->
       htmlcode += "<td>#{row.registry}</td>"
       htmlcode += "<td>#{row.date}</td>"
       htmlcode += '</tr>'
+      ++cnt
     htmlcode += '</tbody>'
     htmlcode += '</table>'
-    $('#data').html(htmlcode)
+    cntHtmlCode = '<p>件数：' + cnt.toString() + '&nbsp;件</p>' 
+    $('#data').html(cntHtmlCode + htmlcode)
     $('#sirdtable').stupidtable()
   else
     $('#data').html('<p>No Data.</p>')

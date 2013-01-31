@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery.ui.all
  *= require_tree .
  */
 
@@ -18,3 +19,12 @@
 @import "./default/header.css";
 @import "./default/body.css";
 @import "./default/footer.css";
+@import "./default/loading.css";
+
+.ui-tooltip-content {
+  padding: 2px;
+  color: dimgray;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: x-small;
+  font-weight: medium;
+}

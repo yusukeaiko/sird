@@ -12,6 +12,7 @@ class StatisticsRecord < ActiveRecord::Base
     if inaddr.length > 0 then
       addrs = inaddr.split(',')
       addrs.each_index {|key| addrs[key].strip!}
+      addrs.delete_if {|addr| addr.length == 0}
       addrs.uniq.each {|addr|
         if check_ip(addr, 'ipv4') then
           row = searchAddr(addr, 'ipv4')
@@ -42,7 +43,7 @@ class StatisticsRecord < ActiveRecord::Base
   end
 
   def self.searchCountryCode2(cc)
-    country_id = Country.find_by_alpha2(cc)
+    country_id = Country.find_by_alpha2(cc.upcase)
     row = country_id == nil ? [] : self.where('country_id = :cc', {:cc => country_id})
     row = select_column(cc, row)
   end
