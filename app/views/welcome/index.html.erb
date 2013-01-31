@@ -1,7 +1,7 @@
 <section id="info">
   <% @versions.each_with_index do |ver, i| %>
   <dl>
-    <dt><%= ver.registry.upcase %> Data Status:</dt>
+    <dt><%= ver.registry.registry.upcase %> Data Status:</dt>
     <dd>Version: <%= ver.version %></dd>
     <dd>Serial: <%= ver.serial %></dd>
     <dd>Update: <%= ver.enddate %></dd>

@@ -41,7 +41,7 @@ writeData = (data) ->
       htmlcode += "<td style=\"text-align:right;\">#{row.value}</td>"
       htmlcode += "<td>#{row.cc}</td>"
       htmlcode += "<td>#{row.area}</td>"
-      if row.country.length > 0
+      if row.country != null && row.country.length > 0
         htmlcode += "<td><div style=\"width:24px;\"><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.country.replace(' ','-')}.png\" /></div>#{row.country}(#{row.country_ja})</td>"
       else
         htmlcode += "<td>#{row.country}</td>"

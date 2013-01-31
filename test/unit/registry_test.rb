@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CountryCodeTest < ActiveSupport::TestCase
+class RegistryTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

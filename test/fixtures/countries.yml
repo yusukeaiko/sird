@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  numeric: MyString
+  alpha3: MyString
+  alpha2: MyString
+  country_name: MyString
+  country_name_ja: MyString
+  area: MyString
+  administrative_division: MyString
+
+two:
+  numeric: MyString
+  alpha3: MyString
+  alpha2: MyString
+  country_name: MyString
+  country_name_ja: MyString
+  area: MyString
+  administrative_division: MyString
