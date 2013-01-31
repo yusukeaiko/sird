@@ -27,6 +27,7 @@ writeData = (data) ->
     htmlcode += '<th data-sort="integer">アドレス数</th>'
     htmlcode += '<th data-sort="string">国コード</th>'
     htmlcode += '<th data-sort="string">地域</th>'
+    htmlcode += '<th data-sort="string">国旗</th>'
     htmlcode += '<th data-sort="string">国名</th>'
     htmlcode += '<th data-sort="string">タイプ</th>'
     htmlcode += '<th data-sort="string">ステータス</th>'
@@ -43,8 +44,10 @@ writeData = (data) ->
       htmlcode += "<td>#{row.cc}</td>"
       htmlcode += "<td>#{row.area}</td>"
       if row.country != null && row.country.length > 0
-        htmlcode += "<td><div style=\"padding:0;margin:0;width:24px;\"><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.country.replace(' ','-')}.png\" /></div>#{row.country}(#{row.country_ja})</td>"
+        htmlcode += "<td><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.country.replace(' ','-')}.png\" /></td>"
+        htmlcode += "<td>#{row.country}(#{row.country_ja})</td>"
       else
+        htmlcode += "<td></td>"
         htmlcode += "<td>#{row.country}</td>"
       htmlcode += "<td>#{row.data_type}</td>"
       htmlcode += "<td>#{row.status}</td>"
