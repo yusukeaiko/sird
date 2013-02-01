@@ -25,6 +25,14 @@
   <% end %>
 
   <div id="country_dialog">
+    <dl id="type_select">
+      <dt>アドレスタイプ:</dt>
+      <dd>
+        <label><input type="checkbox" value="asn" name="addr_type" />ASN</label>
+        <label><input type="checkbox" value="ipv4" name="addr_type" />IPv4</label>
+        <label><input type="checkbox" value="ipv6" name="addr_type" />IPv6</label>
+      </dd>
+    </dl>
     <table>
       <tbody>
         <% @countries.each do |country| %>

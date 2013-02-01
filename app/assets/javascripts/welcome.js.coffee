@@ -28,10 +28,13 @@ $ ->
   
   $('[name=country_add]:input').click ->
     code = $(this).parent().children('input[type="hidden"]').val()
+    types = ''
+    $('input[name=addr_type]:checked').map ->
+      types += ':' + $(this).val()
     if $('#statistics_record_start').val().length == 0
-      $('#statistics_record_start').val(code)
+      $('#statistics_record_start').val(code + types)
     else
-      $('#statistics_record_start').val($('#statistics_record_start').val() + ', ' + code)
+      $('#statistics_record_start').val($('#statistics_record_start').val() + ', ' + code + types)
   
   $('#search_statistics_record').submit ->
     $('#country_dialog').dialog('close')

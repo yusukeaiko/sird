@@ -20,8 +20,8 @@ class StatisticsRecord < ActiveRecord::Base
           row = searchAddr(addr, 'ipv6')
         elsif addr =~ /^[0-9]+$/ then
           row = searchAddr(addr, 'asn')
-        elsif addr =~ /^[a-zA-Z]{2}$/ then
-          row = searchCountryCode2(addr)
+        elsif addr =~ /^[a-z]{2}(:asn|:ipv4|:ipv6)*$/i then
+          row = searchCountryAlpha2(addr)
         else
           row = select_column(addr, [])
           data += row
@@ -42,9 +42,36 @@ class StatisticsRecord < ActiveRecord::Base
     row = select_column(addr, row)
   end
 
-  def self.searchCountryCode2(cc)
-    country_id = Country.find_by_alpha2(cc.upcase)
-    row = country_id == nil ? [] : self.where('country_id = :cc', {:cc => country_id})
+  def self.searchCountryAlpha2(cc)
+    alpha2 = ''
+    types = Array.new()
+    cc.split(':').each {|code|
+      code = code.downcase
+      if code =~ /^[a-z]{2}$/ then
+        alpha2 = code.upcase
+      elsif ['asn','ipv4','ipv6'].include?(code) then
+        types.push(code)
+      end
+    }
+
+    cond = Hash.new()
+    country = Country.find_by_alpha2(alpha2)
+    if country != nil then
+      cond[:country_id] = country.id
+      idPhrase = 'country_id = :country_id '
+      if types.length > 0 then
+        types.uniq!
+        typePhrase = 'and data_type in ('
+        types.each_with_index {|type, i|
+          typePhrase += (i == 0) ? " :data_type#{i} " : ", :data_type#{i} "
+          cond["data_type#{i}"] = type
+        }
+        typePhrase += ')'
+      end
+      row = self.where(idPhrase + typePhrase, cond.symbolize_keys)
+    else
+      row = Array.new()
+    end
     row = select_column(cc, row)
   end
 

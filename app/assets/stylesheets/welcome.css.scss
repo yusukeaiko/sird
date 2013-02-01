@@ -62,6 +62,23 @@ section#ref dl dd {
   float: left
 }
 
+dl#type_select {
+  padding: 2px 0 2px 0;
+  width: 100%;
+  font-size: small;
+  float: left;
+  clear: both;
+}
+dl#type_select dt {
+  font-weight: bold;
+  width: 9em;
+  float: left;
+}
+dl#type_select dd {
+  width: 200px;
+  float: left;
+}
+
 div.ui-dialog-titlebar {
   font-size: small;
 }
