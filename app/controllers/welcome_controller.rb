@@ -4,6 +4,7 @@ class WelcomeController < ApplicationController
     @versions = StatisticsVersion.all
     @summaries = StatisticsSummary.all
     @records = StatisticsRecord.new
+    @countries = Country.all
 
 =begin
     @data = ApnicVersion.find(params[:id])

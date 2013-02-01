@@ -15,6 +15,26 @@ $ ->
   #   alert 'ajax:error'
   # .bind 'ajax:complete', (event, data) ->
   #   alert 'ajax:complete'
+  
+  $('#select_country').click ->
+    $('#country_dialog').dialog('open')
+  $('#country_dialog').dialog
+    autoOpen: false,
+    modal: false,
+    title: 'カントリーコード選択',
+    height: 300,
+    width: 550,
+    position: [50, 200]
+  
+  $('[name=country_add]:input').click ->
+    code = $(this).parent().children('input[type="hidden"]').val()
+    if $('#statistics_record_start').val().length == 0
+      $('#statistics_record_start').val(code)
+    else
+      $('#statistics_record_start').val($('#statistics_record_start').val() + ', ' + code)
+  
+  $('#search_statistics_record').submit ->
+    $('#country_dialog').dialog('close')
 
 writeData = (data) ->
   cnt = 0
@@ -44,11 +64,11 @@ writeData = (data) ->
       htmlcode += "<td>#{row.cc}</td>"
       htmlcode += "<td>#{row.area}</td>"
       if row.country != null && row.country.length > 0
-        htmlcode += "<td><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.country.replace(' ','-')}.png\" /></td>"
+        htmlcode += "<td><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.flag_filename}.png\" /></td>"
         htmlcode += "<td>#{row.country}(#{row.country_ja})</td>"
       else
         htmlcode += "<td></td>"
-        htmlcode += "<td>#{row.country}</td>"
+        htmlcode += "<td></td>"
       htmlcode += "<td>#{row.data_type}</td>"
       htmlcode += "<td>#{row.status}</td>"
       htmlcode += "<td>#{row.registry}</td>"
@@ -57,7 +77,7 @@ writeData = (data) ->
       ++cnt
     htmlcode += '</tbody>'
     htmlcode += '</table>'
-    cntHtmlCode = '<p>件数：' + cnt.toString() + '&nbsp;件</p>' 
+    cntHtmlCode = '<p>' + cnt.toString() + '&nbsp;件</p>'
     $('#data').html(cntHtmlCode + htmlcode)
     $('#sirdtable').stupidtable()
   else

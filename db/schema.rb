@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130130120133) do
     t.string   "country_name_ja"
     t.string   "area"
     t.string   "administrative_division"
+    t.string   "flag_filename"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end

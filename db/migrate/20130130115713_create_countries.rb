@@ -8,6 +8,7 @@ class CreateCountries < ActiveRecord::Migration
       t.string :country_name_ja
       t.string :area
       t.string :administrative_division
+      t.string :flag_filename
 
       t.timestamps
     end

@@ -62,3 +62,23 @@ section#ref dl dd {
   float: left
 }
 
+div.ui-dialog-titlebar {
+  font-size: small;
+}
+
+#country_dialog table,
+#country_dialog table th,
+#country_dialog table td {
+  font-size: small;
+}
+
+#country_dialog table th,
+#country_dialog table td {
+  font-size: small;
+  padding: 2px;
+}
+
+#country_dialog table th {
+  font-weight: bold;
+}
+

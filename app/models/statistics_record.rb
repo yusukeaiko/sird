@@ -63,6 +63,7 @@ class StatisticsRecord < ActiveRecord::Base
                     :area => row.country.area,
                     :country => row.country.country_name,
                     :country_ja => row.country.country_name_ja,
+                    :flag_filename => row.country.flag_filename,
                     :input_value => input_value
                   })
       }
@@ -78,6 +79,7 @@ class StatisticsRecord < ActiveRecord::Base
                   :area => '',
                   :country => '',
                   :country_ja => '',
+                  :flag_filename => '',
                   :input_value => input_value
                 })
     end

@@ -20,8 +20,28 @@
 <section id="search">
   <%= form_for(@records, :url => {:controller => 'statistics_records', :action => 'index.json'}, :html => {:class => 'search_statistics_record', :id => 'search_statistics_record'}, :remote => true) do |f| %>
   <label>Keyword: <%= f.text_field :start, :title => 'キーワードはIPv4、ASNコード、カントリーコード(ISO3166-1 alpha-2)を入力可能です。<br />複数のキーワードをカンマ区切りで複数入力できます。'%></label>
+  [<a id="select_country" href="javascript:void(0);" title="カントリーコードの選択画面を開く">Country</a>]
   <%= f.submit "Search" %>
   <% end %>
+
+  <div id="country_dialog">
+    <table>
+      <tbody>
+        <% @countries.each do |country| %>
+        <tr>
+          <td>
+            <input type="button" value="ADD" name="country_add" />
+            <input type="hidden" value="<%= country.alpha2 %>" />
+          </td>
+          <td><img alt="" src="/assets/flags/shiny/16/<%= country.flag_filename %>.png" /></td>
+          <td name="country_code"><%= country.alpha2 %></td>
+          <td><%= country.country_name %>(<%= country.country_name_ja %>)</td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
 </section>
 
 <section id="data">
