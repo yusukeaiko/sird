@@ -1,11 +1,21 @@
 # -*- coding: utf-8 -*-
 module Iana
+  # IPアドレスリストファイルを解析し、下記テーブルへの格納を担当するモジュール
+  # * statistics_versions
+  # * statistics_summaries
+  # * statistics_records
   module Update
-    def self.execute(registries)
+    # すべてのIPアドレスリストを解析して各テーブルへ反映(起点メソッド)
+    # _registry_ :: Registry.allの実行結果を受け取ります。
+    # 戻り値 :: 必ずtrueを返します。
+    def self.execute(registry)
       clear()
-      registries.each {|row| update_records(row)}
+      registry.each {|row| update_records(row)}
+      return true
     end
 
+    # statistics系テーブルを初期化(all delete)をおこなう
+    # 戻り値 :: 必ず *true* を返します。
     def self.clear()
       StatisticsRecord.delete_all
       StatisticsVersion.delete_all
@@ -13,6 +23,8 @@ module Iana
       return true
     end
 
+    # IPアドレスリストを解析して各テーブルへ反映
+    # _registry_ :: Registry.allの実行結果の一行を受け取ります。
     def self.update_records(registry)
       tmpfile = TMP_DIR + registry.data_file
 
@@ -36,6 +48,9 @@ module Iana
       }
     end
 
+    # yyyymmdd形式の日付のバリデーションとDate型への変換をおこないます。
+    # _date_ :: yyyymmdd形式の文字列を受け取ります。
+    # 戻り値 :: Date型へ変換可能なら *Date型* を、変換不可なら *nil* を返します。
     def self.check_date(date)
       begin
         ret = (date.length == 8) ? Date.strptime(date, "%Y%m%d").to_s : nil
@@ -45,6 +60,9 @@ module Iana
       return ret
     end
 
+    # statistics_versionsテーブルへレコードを追加します。
+    # _registry_ :: Registry.allの実行結果の一行を受け取ります。
+    # _data_ :: 解析したIPアドレスリストのバージョン行を受け取ります。
     def self.set_version(registry, data = {})
       row = {
         :version     => data[0],
@@ -61,6 +79,9 @@ module Iana
       end
     end
 
+    # statistics_summariesテーブルへレコードを追加します。
+    # _registry_ :: Registry.allの実行結果の一行を受け取ります。
+    # _data_ :: 解析したIPアドレスリストのサマリ行を受け取ります。
     def self.set_summary(registry, data = {})
       row = {
         :registry_id => registry.id,
@@ -74,6 +95,9 @@ module Iana
       end
     end
 
+    # statistics_recordsテーブルへレコードを追加します。
+    # _registry_ :: Registry.allの実行結果の一行を受け取ります。
+    # _data_ :: 解析したIPアドレスリストのレコード行を受け取ります。
     def self.set_record(registry, data = {})
       country_id = nil
       if data[1].length == 2 then
