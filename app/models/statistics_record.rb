@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
 require 'ipaddr'
 
+=begin
+IPアドレスリストファイル内に格納されているレコードを管理するModelクラスです。
+データはianaモジュールによって投入されます。
+=end
 class StatisticsRecord < ActiveRecord::Base
   attr_accessible :country_id, :data_type, :date, :end_addr_dec, :extensions, :registry_id, :start, :start_addr_dec, :status, :value
   belongs_to :registry
   belongs_to :country
 
+  # 入力値を受け取り、バリデーション及び値の分割、検索を取得
+  # _inaddr_ :: 入力された文字列を受け取ります。
+  # 戻り値 :: 検索結果を返します。
   def self.search(inaddr)
     data = Array.new()
     dataType = ''
@@ -35,6 +42,10 @@ class StatisticsRecord < ActiveRecord::Base
     return data
   end
 
+  # 入力値がASN/IPv4/IPv6だと思われる場合の検索結果を取得
+  # _addr_ :: 入力されたアドレスを受け取ります。
+  # _dataType_ :: (asn|ipv4|ipv6)を受け取ります。
+  # 戻り値 :: 検索結果を返します。検索結果がない場合はデータのないハッシュを返します。
   def self.searchAddr(addr, dataType)
     ipdec = (addr =~ /^[0-9]+$/) ? addr : IPAddr.new(addr).to_i
     row = self.where('data_type = :dataType and start_addr_dec <= :ipdec and end_addr_dec >= :ipdec',
@@ -42,6 +53,9 @@ class StatisticsRecord < ActiveRecord::Base
     row = select_column(addr, row)
   end
 
+  # 入力値がカントリーコードだと思われる場合の検索結果を取得
+  # _cc_ :: カントリーコード + データタイプを受け取ります。
+  # 戻り値 :: 検索結果を返します。検索結果がない場合はデータのないハッシュを返します。
   def self.searchCountryAlpha2(cc)
     alpha2 = ''
     types = Array.new()
@@ -75,6 +89,10 @@ class StatisticsRecord < ActiveRecord::Base
     row = select_column(cc, row)
   end
 
+  # 検索結果の項目を設定
+  # _input_value_ :: 入力された値を受け取ります。
+  # _rows_ :: 入力された値を元に抽出した検索結果を受け取ります。
+  # 戻り値 :: 入力された値と検索結果をまとめた行を返します。
   def self.select_column(input_value, rows)
     data = Array.new()
     if rows.length > 0 then
@@ -114,6 +132,10 @@ class StatisticsRecord < ActiveRecord::Base
     return data
   end
 
+  # IPアドレス形式のバリデーションをおこないます。
+  # _addr_ :: IPv4/IPv6とおもわれる入力値を受け取ります。
+  # _protcol_ :: 判定したいプロトコル名('ipv4'|'ipv6')を受け取ります。
+  # 戻り値 :: _addr_が_protcol_として正しければ *true* を、正しくなければ *false* を返します。
   def self.check_ip(addr, protcol)
     begin
       case protcol
