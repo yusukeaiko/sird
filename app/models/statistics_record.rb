@@ -73,6 +73,7 @@ class StatisticsRecord < ActiveRecord::Base
     if country != nil then
       cond[:country_id] = country.id
       idPhrase = 'country_id = :country_id '
+      typePhrase = ''
       if types.length > 0 then
         types.uniq!
         typePhrase = 'and data_type in ('
