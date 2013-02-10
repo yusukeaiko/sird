@@ -45,7 +45,7 @@ writeData = (data) ->
     htmlcode = '<table id="sirdtable">'
     htmlcode += '<thead>'
     htmlcode += '<tr>'
-    htmlcode += '<th data-sort="string">入力値</th>'
+    htmlcode += '<th data-sort="string">Keyword</th>'
     htmlcode += '<th data-sort="string">開始アドレス</th>'
     htmlcode += '<th data-sort="integer">アドレス数</th>'
     htmlcode += '<th data-sort="string">国コード</th>'
@@ -80,7 +80,7 @@ writeData = (data) ->
       ++cnt
     htmlcode += '</tbody>'
     htmlcode += '</table>'
-    cntHtmlCode = '<p>' + cnt.toString() + '&nbsp;件</p>'
+    cntHtmlCode = '<p>検索結果:&nbsp;' + cnt.toString().replace(/^(-?\d+)(\d{3})/, "$1,$2") + '&nbsp;件</p>'
     $('#data').html(cntHtmlCode + htmlcode)
     $('#sirdtable').stupidtable()
   else
