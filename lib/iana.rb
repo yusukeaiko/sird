@@ -20,6 +20,10 @@ module Iana
   # IPアドレスリストファイルをダウンロードする一時ディレクトリ
   TMP_DIR = Rails.root.join('tmp/').to_s
 
+  ASN = 'asn'
+  IPV4 = 'ipv4'
+  IPV6 = 'ipv6'
+
   # CRONからキックする実行用メソッド
   def self.execute()
     registry = Registry.all()

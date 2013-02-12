@@ -6,7 +6,7 @@ IPアドレスリストファイル内に格納されているレコードを管
 データはianaモジュールによって投入されます。
 =end
 class StatisticsRecord < ActiveRecord::Base
-  attr_accessible :country_id, :data_type, :date, :end_addr_dec, :extensions, :registry_id, :start, :start_addr_dec, :status, :value
+  attr_accessible :block, :country_id, :data_type, :date, :end_addr, :end_addr_dec, :extensions, :mask, :registry_id, :start_addr, :start_addr_dec, :status, :value
   belongs_to :registry
   belongs_to :country
 
@@ -102,10 +102,12 @@ class StatisticsRecord < ActiveRecord::Base
                     :cc => row.country.alpha2,
                     :date => row.date,
                     :registry => row.registry.registry,
-                    :start => row.start,
-                    :status => row.status,
-                    :data_type => row.data_type,
+                    :start_addr => row.start_addr,
+                    :end_addr => row.end_addr,
+                    :block => row.block,
                     :value => row.value,
+                    :data_type => row.data_type,
+                    :status => row.status,
                     :area => row.country.area,
                     :country => row.country.country_name,
                     :country_ja => row.country.country_name_ja,
@@ -118,10 +120,12 @@ class StatisticsRecord < ActiveRecord::Base
                   :cc => '',
                   :date => '',
                   :registry => '',
-                  :start => '',
+                  :start_addr => '',
+                  :end_addr => '',
+                  :block => '',
+                  :value => '',
                   :status => '',
                   :data_type => '',
-                  :value => '',
                   :area => '',
                   :country => '',
                   :country_ja => '',

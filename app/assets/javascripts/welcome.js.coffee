@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-  $('#statistics_record_start').focus()
+  $('#statistics_record_start_addr').focus()
 
 $ ->
   $('#search_statistics_record')
@@ -31,10 +31,10 @@ $ ->
     types = ''
     $('input[name=addr_type]:checked').map ->
       types += ':' + $(this).val()
-    if $('#statistics_record_start').val().length == 0
-      $('#statistics_record_start').val(code + types)
+    if $('#statistics_record_start_addr').val().length == 0
+      $('#statistics_record_start_addr').val(code + types)
     else
-      $('#statistics_record_start').val($('#statistics_record_start').val() + ', ' + code + types)
+      $('#statistics_record_start_addr').val($('#statistics_record_start_addr').val() + ', ' + code + types)
   
   $('#search_statistics_record').submit ->
     $('#country_dialog').dialog('close')
@@ -46,7 +46,9 @@ writeData = (data) ->
     htmlcode += '<thead>'
     htmlcode += '<tr>'
     htmlcode += '<th data-sort="string">Keyword</th>'
-    htmlcode += '<th data-sort="string">開始アドレス</th>'
+    htmlcode += '<th data-sort="string">Addr:From</th>'
+    htmlcode += '<th data-sort="string">Addr:To</th>'
+    htmlcode += '<th data-sort="integer">ブロック</th>'
     htmlcode += '<th data-sort="integer">アドレス数</th>'
     htmlcode += '<th data-sort="string">国コード</th>'
     htmlcode += '<th data-sort="string">地域</th>'
@@ -62,7 +64,9 @@ writeData = (data) ->
     for row, i in data
       htmlcode += '<tr>'
       htmlcode += "<td>#{row.input_value}</td>"
-      htmlcode += "<td>#{row.start}</td>"
+      htmlcode += "<td>#{row.start_addr}</td>"
+      htmlcode += "<td>#{row.end_addr}</td>"
+      htmlcode += "<td style=\"text-align:right;\">#{row.block}</td>"
       htmlcode += "<td style=\"text-align:right;\">#{row.value}</td>"
       htmlcode += "<td>#{row.cc}</td>"
       htmlcode += "<td>#{row.area}</td>"

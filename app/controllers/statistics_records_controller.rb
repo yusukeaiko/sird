@@ -4,10 +4,10 @@ class StatisticsRecordsController < ApplicationController
   # GET /statistics_records.json
   def index
     val = ''
-    if params.key?(:start) then
-      val = params[:start]
+    if params.key?(:start_addr) then
+      val = params[:start_addr]
     elsif params.key?(:statistics_record) then
-      val = params[:statistics_record][:start]
+      val = params[:statistics_record][:start_addr]
     end
 
     @statistics_records = StatisticsRecord.search(val)
