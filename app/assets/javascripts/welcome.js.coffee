@@ -45,41 +45,45 @@ writeData = (data) ->
     htmlcode = '<table id="sirdtable">'
     htmlcode += '<thead>'
     htmlcode += '<tr>'
-    htmlcode += '<th data-sort="string">Keyword</th>'
-    htmlcode += '<th data-sort="string">Addr:From</th>'
-    htmlcode += '<th data-sort="string">Addr:To</th>'
-    htmlcode += '<th data-sort="integer">ブロック</th>'
-    htmlcode += '<th data-sort="integer">アドレス数</th>'
-    htmlcode += '<th data-sort="string">国コード</th>'
-    htmlcode += '<th data-sort="string">地域</th>'
-    htmlcode += '<th data-sort="string">国旗</th>'
-    htmlcode += '<th data-sort="string">国名</th>'
-    htmlcode += '<th data-sort="string">タイプ</th>'
-    htmlcode += '<th data-sort="string">ステータス</th>'
-    htmlcode += '<th data-sort="string">レジストラ</th>'
-    htmlcode += '<th data-sort="string">レジストラ払出日</th>'
+    htmlcode += '<th data-sort="string" rowspan=\"2\">Keyword</th>'
+    htmlcode += '<th colspan=\"3\">Address</th>'
+    htmlcode += '<th colspan=\"4\">Country</th>'
+    htmlcode += '<th data-sort="string" rowspan=\"2\">Registy</th>'
+    htmlcode += '</tr>'
+    htmlcode += '<tr>'
+    htmlcode += '<th data-sort="string">Address</th>'
+    htmlcode += '<th data-sort="string">Prefix</th>'
+    htmlcode += '<th data-sort="string">Type</th>'
+    htmlcode += '<th>Flag</th>'
+    htmlcode += '<th data-sort="string">Code</th>'
+    htmlcode += '<th data-sort="string">Name</th>'
+    htmlcode += '<th data-sort="string">Area</th>'
     htmlcode += '</tr>'
     htmlcode += '</thead>'
     htmlcode += '<tbody>'
     for row, i in data
+      regInfo = "Status:&nbsp;#{row.status}<br />"
+      regInfo += "Date:&nbsp;#{row.date}"
+      addrInfo = "From:&nbsp;#{row.start_addr}<br />"
+      addrInfo += "To:&nbsp;#{row.end_addr}<br />"
+      addrInfo += "Count: #{row.value}"
+      
       htmlcode += '<tr>'
       htmlcode += "<td>#{row.input_value}</td>"
-      htmlcode += "<td>#{row.start_addr}</td>"
-      htmlcode += "<td>#{row.end_addr}</td>"
-      htmlcode += "<td style=\"text-align:right;\">#{row.block}</td>"
-      htmlcode += "<td style=\"text-align:right;\">#{row.value}</td>"
-      htmlcode += "<td>#{row.cc}</td>"
-      htmlcode += "<td>#{row.area}</td>"
+      htmlcode += "<td title=\"#{addrInfo}\">#{row.start_addr}</td>"
+      htmlcode += "<td style=\"text-align:right;\" title=\"#{addrInfo}\">#{row.prefix}</td>"
+      htmlcode += "<td>#{row.data_type}</td>"
       if row.country != null && row.country.length > 0
         htmlcode += "<td><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.flag_filename}.png\" /></td>"
+        htmlcode += "<td>#{row.cc}</td>"
         htmlcode += "<td>#{row.country}(#{row.country_ja})</td>"
+        htmlcode += "<td>#{row.area}</td>"
       else
         htmlcode += "<td></td>"
+        htmlcode += "<td>#{row.cc}</td>"
         htmlcode += "<td></td>"
-      htmlcode += "<td>#{row.data_type}</td>"
-      htmlcode += "<td>#{row.status}</td>"
-      htmlcode += "<td>#{row.registry}</td>"
-      htmlcode += "<td>#{row.date}</td>"
+        htmlcode += "<td>#{row.area}</td>"
+      htmlcode += "<td title=\"#{regInfo}\">#{row.registry}</td>"
       htmlcode += '</tr>'
       ++cnt
     htmlcode += '</tbody>'

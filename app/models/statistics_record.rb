@@ -6,7 +6,7 @@ IPアドレスリストファイル内に格納されているレコードを管
 データはianaモジュールによって投入されます。
 =end
 class StatisticsRecord < ActiveRecord::Base
-  attr_accessible :block, :country_id, :data_type, :date, :end_addr, :end_addr_dec, :extensions, :mask, :registry_id, :start_addr, :start_addr_dec, :status, :value
+  attr_accessible :prefix, :country_id, :data_type, :date, :end_addr, :end_addr_dec, :extensions, :registry_id, :start_addr, :start_addr_dec, :status, :value
   belongs_to :registry
   belongs_to :country
 
@@ -49,7 +49,7 @@ class StatisticsRecord < ActiveRecord::Base
   def self.searchAddr(addr, dataType)
     ipdec = (addr =~ /^[0-9]+$/) ? addr : IPAddr.new(addr).to_i
     row = self.where('data_type = :dataType and start_addr_dec <= :ipdec and end_addr_dec >= :ipdec',
-                     {:dataType => dataType, :ipdec => ipdec})
+                     {:dataType => dataType, :ipdec => Iana.zero_fill_number_string(ipdec)})
     row = select_column(addr, row)
   end
 
@@ -104,7 +104,7 @@ class StatisticsRecord < ActiveRecord::Base
                     :registry => row.registry.registry,
                     :start_addr => row.start_addr,
                     :end_addr => row.end_addr,
-                    :block => row.block,
+                    :prefix => row.prefix,
                     :value => row.value,
                     :data_type => row.data_type,
                     :status => row.status,
@@ -122,7 +122,7 @@ class StatisticsRecord < ActiveRecord::Base
                   :registry => '',
                   :start_addr => '',
                   :end_addr => '',
-                  :block => '',
+                  :prefix => '',
                   :value => '',
                   :status => '',
                   :data_type => '',

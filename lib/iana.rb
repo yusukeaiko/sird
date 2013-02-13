@@ -19,6 +19,7 @@ IANA以下5つのレジストラから最新のIPアドレスリストを取得�
 module Iana
   # IPアドレスリストファイルをダウンロードする一時ディレクトリ
   TMP_DIR = Rails.root.join('tmp/').to_s
+  DEC_DIGITS = (2 ** 128).to_s.length
 
   ASN = 'asn'
   IPV4 = 'ipv4'
@@ -30,5 +31,15 @@ module Iana
     if self::Download.execute(registry) then
       self::Update.execute(registry)
     end
+  end
+
+  def self.zero_fill_number_string(value)
+    ret = value
+    begin
+      ret = sprintf("%#0*d", DEC_DIGITS, value)
+    rescue
+      ret = value
+    end
+    return ret
   end
 end

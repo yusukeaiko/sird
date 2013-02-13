@@ -49,14 +49,13 @@ ActiveRecord::Schema.define(:version => 20130130120133) do
     t.string   "data_type"
     t.string   "start_addr"
     t.string   "end_addr"
-    t.integer  "value"
-    t.integer  "block"
-    t.string   "mask"
+    t.string   "value"
+    t.integer  "prefix"
     t.string   "date"
     t.string   "status",         :null => false
     t.string   "extensions"
-    t.integer  "start_addr_dec"
-    t.integer  "end_addr_dec"
+    t.string   "start_addr_dec"
+    t.string   "end_addr_dec"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

@@ -110,23 +110,11 @@ module Iana
         :country_id  => country_id,
         :data_type   => data[2],
         :start_addr  => data[3],
-        :end_addr    => nil,
-        :value       => data[4].to_i,
-        :block       => nil,
-        :mask        => nil,
         :date        => check_date(data[5]),
         :status      => data[6],
-        :extensions  => data[7],
-        :start_addr_dec => nil,
-        :end_addr_dec => nil
+        :extensions  => data[7]
       }
-
-      addr_info = conv_addr(row[:data_type], row[:start_addr], row[:value])
-      row[:end_addr] = addr_info[:end_addr]
-      row[:block] = addr_info[:block]
-      row[:mask] = addr_info[:mask]
-      row[:start_addr_dec] = addr_info[:start_addr_dec]
-      row[:end_addr_dec] = addr_info[:end_addr_dec]
+      row.merge!(conv_addr(row[:data_type], row[:start_addr], data[4].to_i))
 
       record = StatisticsRecord.new(row)
       if record.save then
@@ -136,8 +124,8 @@ module Iana
     def self.conv_addr(type, addr, value)
       row = {
         :end_addr => nil,
-        :block => nil,
-        :mask => nil,
+        :prefix => nil,
+        :value => nil,
         :start_addr_dec => nil,
         :end_addr_dec => nil
       }
@@ -145,24 +133,25 @@ module Iana
       if addr.length > 0 then
         case type
         when IPV4
-          row[:block] = 32 - Math.log2(value).to_i
-          saddr = IPAddr.new(addr).mask(row[:block])
+          row[:prefix] = 32 - Math.log2(value).to_i
+          saddr = IPAddr.new(addr).mask(row[:prefix])
+          row[:value] = value.to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, '\1,')
           row[:end_addr] = saddr.to_range.last.to_s
-          row[:mask] = IPAddr.new(2 ** row[:block], Socket::AF_INET).to_s
-          row[:start_addr_dec] = saddr.to_range.first.to_i
-          row[:end_addr_dec] = saddr.to_range.last.to_i
+          row[:start_addr_dec] = parent.zero_fill_number_string(saddr.to_range.first.to_i)
+          row[:end_addr_dec] = parent.zero_fill_number_string(saddr.to_range.last.to_i)
         when IPV6
           saddr = IPAddr.new(addr).mask(value)
-          row[:block] = value
-          row[:value] = 2 ** value
+          row[:prefix] = value
+          row[:value] = (2 ** value).to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, '\1,')
           row[:end_addr] = saddr.to_range.last.to_s
-          row[:start_addr_dec] = saddr.to_range.first.to_i
-          row[:end_addr_dec] = saddr.to_range.last.to_i
+          row[:start_addr_dec] = parent.zero_fill_number_string(saddr.to_range.first.to_i)
+          row[:end_addr_dec] = parent.zero_fill_number_string(saddr.to_range.last.to_i)
         when ASN
-          row[:end_addr] = addr.to_i + value - 1
-          row[:block] = Math.log2(value).to_i
-          row[:start_addr_dec] = addr.to_i
-          row[:end_addr_dec] = row[:end_addr]
+          row[:prefix] = Math.log2(value).to_i
+          row[:value] = value.to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, '\1,')
+          row[:end_addr] = (addr.to_i + value - 1).to_s
+          row[:start_addr_dec] = parent.zero_fill_number_string(addr.to_i)
+          row[:end_addr_dec] = parent.zero_fill_number_string(row[:end_addr].to_i)
         end
       end
       return row
