@@ -27,6 +27,19 @@ Section#search p.description {
   font-size: x-small;
 }
 
+section#data dl#keywordLinks {
+  width: 100%;
+  float: left;
+}
+section#data dl#keywordLinks dt {
+  padding-right: 5px;
+  float: left
+}
+section#data dl#keywordLinks dd {
+  padding-right: 5px;
+  float: left
+}
+
 section#data table {
   border-spacing: 0;
   empty-cell: show;

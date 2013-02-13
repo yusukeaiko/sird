@@ -16,6 +16,12 @@ $ ->
   # .bind 'ajax:complete', (event, data) ->
   #   alert 'ajax:complete'
   
+  $('#search_statistics_record').submit ->
+    $('#country_dialog').dialog('close')
+  
+  countryDialog()
+
+countryDialog = ->
   $('#select_country').click ->
     $('#country_dialog').dialog('open')
   $('#country_dialog').dialog
@@ -25,7 +31,6 @@ $ ->
     height: 300,
     width: 550,
     position: [50, 200]
-  
   $('[name=country_add]:input').click ->
     code = $(this).parent().children('input[type="hidden"]').val()
     types = ''
@@ -35,61 +40,77 @@ $ ->
       $('#statistics_record_start_addr').val(code + types)
     else
       $('#statistics_record_start_addr').val($('#statistics_record_start_addr').val() + ', ' + code + types)
-  
-  $('#search_statistics_record').submit ->
-    $('#country_dialog').dialog('close')
+
+keywordLink = ->
+  words = $('#statistics_record_start_addr').val().split(',')
+  for word, i in words
+    words[i] = jQuery.trim(word)
+  words = jQuery.unique(words)
+  html = ''
+  if words.length > 0
+    html = '<dl id="keywordLinks"><dt>Keyword Links :: </dt>'
+    for word in words
+      html += "<dd><a href=\"\#word#{word}\">#{word}</a></dd>"
+    html += '</dl>'
+  return html
 
 writeData = (data) ->
   cnt = 0
+  bkeyword = ''
   if data.length > 0
-    htmlcode = '<table id="sirdtable">'
-    htmlcode += '<thead>'
-    htmlcode += '<tr>'
-    htmlcode += '<th data-sort="string" rowspan=\"2\">Keyword</th>'
-    htmlcode += '<th colspan=\"3\">Address</th>'
-    htmlcode += '<th colspan=\"4\">Country</th>'
-    htmlcode += '<th data-sort="string" rowspan=\"2\">Registy</th>'
-    htmlcode += '</tr>'
-    htmlcode += '<tr>'
-    htmlcode += '<th data-sort="string">Address</th>'
-    htmlcode += '<th data-sort="string">Prefix</th>'
-    htmlcode += '<th data-sort="string">Type</th>'
-    htmlcode += '<th>Flag</th>'
-    htmlcode += '<th data-sort="string">Code</th>'
-    htmlcode += '<th data-sort="string">Name</th>'
-    htmlcode += '<th data-sort="string">Area</th>'
-    htmlcode += '</tr>'
-    htmlcode += '</thead>'
-    htmlcode += '<tbody>'
+    html = '<table id="sirdtable">'
+    html += '<thead>'
+    html += '<tr>'
+    html += '<th data-sort="string" rowspan=\"2\">Keyword</th>'
+    html += '<th colspan=\"3\">Address</th>'
+    html += '<th colspan=\"4\">Country</th>'
+    html += '<th data-sort="string" rowspan=\"2\">Registy</th>'
+    html += '</tr>'
+    html += '<tr>'
+    html += '<th data-sort="string">Address</th>'
+    html += '<th data-sort="string">Prefix</th>'
+    html += '<th data-sort="string">Type</th>'
+    html += '<th>Flag</th>'
+    html += '<th data-sort="string">Code</th>'
+    html += '<th data-sort="string">Name</th>'
+    html += '<th data-sort="string">Area</th>'
+    html += '</tr>'
+    html += '</thead>'
+    html += '<tbody>'
     for row, i in data
+      if bkeyword == row.input_value
+        keywordId = ''
+      else
+        keywordId = "id=\"word#{row.input_value}\""
+        bkeyword = row.input_value
       regInfo = "Status:&nbsp;#{row.status}<br />"
       regInfo += "Date:&nbsp;#{row.date}"
       addrInfo = "From:&nbsp;#{row.start_addr}<br />"
       addrInfo += "To:&nbsp;#{row.end_addr}<br />"
       addrInfo += "Count: #{row.value}"
       
-      htmlcode += '<tr>'
-      htmlcode += "<td>#{row.input_value}</td>"
-      htmlcode += "<td title=\"#{addrInfo}\">#{row.start_addr}</td>"
-      htmlcode += "<td style=\"text-align:right;\" title=\"#{addrInfo}\">#{row.prefix}</td>"
-      htmlcode += "<td>#{row.data_type}</td>"
+      html += "<tr #{keywordId}>"
+      html += "<td>#{row.input_value}</td>"
+      html += "<td title=\"#{addrInfo}\">#{row.start_addr}</td>"
+      html += "<td style=\"text-align:right;\" title=\"#{addrInfo}\">#{row.prefix}</td>"
+      html += "<td>#{row.data_type}</td>"
       if row.country != null && row.country.length > 0
-        htmlcode += "<td><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.flag_filename}.png\" /></td>"
-        htmlcode += "<td>#{row.cc}</td>"
-        htmlcode += "<td>#{row.country}(#{row.country_ja})</td>"
-        htmlcode += "<td>#{row.area}</td>"
+        html += "<td><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.flag_filename}.png\" /></td>"
+        html += "<td>#{row.cc}</td>"
+        html += "<td>#{row.country}(#{row.country_ja})</td>"
+        html += "<td>#{row.area}</td>"
       else
-        htmlcode += "<td></td>"
-        htmlcode += "<td>#{row.cc}</td>"
-        htmlcode += "<td></td>"
-        htmlcode += "<td>#{row.area}</td>"
-      htmlcode += "<td title=\"#{regInfo}\">#{row.registry}</td>"
-      htmlcode += '</tr>'
+        html += "<td></td>"
+        html += "<td>#{row.cc}</td>"
+        html += "<td></td>"
+        html += "<td>#{row.area}</td>"
+      html += "<td title=\"#{regInfo}\">#{row.registry}</td>"
+      html += '</tr>'
       ++cnt
-    htmlcode += '</tbody>'
-    htmlcode += '</table>'
-    cntHtmlCode = '<p>検索結果:&nbsp;' + cnt.toString().replace(/^(-?\d+)(\d{3})/, "$1,$2") + '&nbsp;件</p>'
-    $('#data').html(cntHtmlCode + htmlcode)
+    html += '</tbody>'
+    html += '</table>'
+    cntHtml = '<p>検索結果:&nbsp;' + cnt.toString().replace(/^(-?\d+)(\d{3})/, "$1,$2") + '&nbsp;件</p>'
+    $('#data').html(cntHtml + keywordLink() + html)
     $('#sirdtable').stupidtable()
   else
     $('#data').html('<p>No Data.</p>')
