@@ -36,8 +36,14 @@ section#data dl#keywordLinks dt {
   float: left
 }
 section#data dl#keywordLinks dd {
-  padding-right: 5px;
-  float: left
+  margin-right: 5px;
+  padding: 2px;
+  font-size: small;
+  line-height:1em;
+  border: 1px solid gainsboro;
+  background-color: WhiteSmoke;
+  float: left;
+  cursor: pointer;
 }
 
 section#data table {
