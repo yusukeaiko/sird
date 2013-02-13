@@ -50,9 +50,14 @@ keywordLink = ->
   if words.length > 0
     html = '<dl id="keywordLinks"><dt>Keyword Links :: </dt>'
     for word in words
-      html += "<dd><a href=\"\#word#{word}\">#{word}</a></dd>"
+      html += "<dd class=\"keywordLink\">#{word}</dd>"
     html += '</dl>'
   return html
+
+keywordLinkClick = ->
+  $('#keywordLinks > .keywordLink').click ->
+    point = $('.keywordPoint:contains("' + $(this).text() + '")').offset().top
+    $('html,body').animate({scrollTop: point}, 'fast')
 
 writeData = (data) ->
   cnt = 0
@@ -79,9 +84,9 @@ writeData = (data) ->
     html += '<tbody>'
     for row, i in data
       if bkeyword == row.input_value
-        keywordId = ''
+        keywordClass = ''
       else
-        keywordId = "id=\"word#{row.input_value}\""
+        keywordClass = 'class="keywordPoint"'
         bkeyword = row.input_value
       regInfo = "Status:&nbsp;#{row.status}<br />"
       regInfo += "Date:&nbsp;#{row.date}"
@@ -89,8 +94,8 @@ writeData = (data) ->
       addrInfo += "To:&nbsp;#{row.end_addr}<br />"
       addrInfo += "Count: #{row.value}"
       
-      html += "<tr #{keywordId}>"
-      html += "<td>#{row.input_value}</td>"
+      html += "<tr>"
+      html += "<td #{keywordClass}>#{row.input_value}</td>"
       html += "<td title=\"#{addrInfo}\">#{row.start_addr}</td>"
       html += "<td style=\"text-align:right;\" title=\"#{addrInfo}\">#{row.prefix}</td>"
       html += "<td>#{row.data_type}</td>"
@@ -112,5 +117,6 @@ writeData = (data) ->
     cntHtml = '<p>検索結果:&nbsp;' + cnt.toString().replace(/^(-?\d+)(\d{3})/, "$1,$2") + '&nbsp;件</p>'
     $('#data').html(cntHtml + keywordLink() + html)
     $('#sirdtable').stupidtable()
+    keywordLinkClick()
   else
     $('#data').html('<p>No Data.</p>')
