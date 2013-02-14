@@ -10,7 +10,7 @@ $ ->
   .bind 'ajax:beforeSend', (event, data) ->
     $('#data').html('<div class="circle_outside"></div><div class="circle_inside"></div>')
   .bind 'ajax:success', (event, data) ->
-    writeData(data)
+    writeResult(data)
   # .bind 'ajax:error', (event, data) ->
   #   alert 'ajax:error'
   # .bind 'ajax:complete', (event, data) ->
@@ -33,7 +33,7 @@ countryDialog = ->
     title: 'カントリーコード選択',
     height: 300,
     width: 550,
-    position: [50, 200]
+    position: [100, 220]
   $('[name=country_add]:input').click ->
     code = $(this).parent().children('input[type="hidden"]').val()
     types = ''
@@ -43,6 +43,83 @@ countryDialog = ->
       $('#statistics_record_start_addr').val(code + types)
     else
       $('#statistics_record_start_addr').val($('#statistics_record_start_addr').val() + ', ' + code + types)
+
+writeResult = (data) ->
+  if data.length > 0
+    # 検索結果
+    html = '<table id="sirdtable"><thead>'
+    html += resultHeader()
+    html += '</thead><tbody id="sirtable_body">'
+    rows = resultRows(data)
+    html += rows.join('')
+    html += '</tbody></table>'
+    # 結果件数
+    cntHtml = '<p>検索結果:&nbsp;' + rows.length.toString().replace(/^(-?\d+)(\d{3})/, "$1,$2") + '&nbsp;件&nbsp;'
+    cntHtml += '<input type="button" id="ipt_ipv4block" name="ipt_ipv4block" value="IPv4アドレスをブロック" title="検索結果のIPv4アドレスを全てブロックするレシピを生成する。" /></p>'
+    # iptables向け処理ボタン
+    iptHtml = '<div id="iptable_dialog"><p>検索結果のIPv4アドレスを全てブロックするレシピ</p><textarea id="ipt_command"></textarea></div>'
+    # 結合して書き出し
+    $('#data').html(cntHtml + keywordLink() + iptHtml + html)
+    $('#sirdtable').stupidtable()
+    # キーワードリンククリックイベント処理
+    keywordLinkClick()
+    iptableDialog()
+  else
+    $('#data').html('<p>No Data.</p>')
+
+resultHeader = ->
+  html = '<tr>'
+  html += '<th data-sort="string" rowspan=\"2\">Keyword</th>'
+  html += '<th colspan=\"3\">Address</th>'
+  html += '<th colspan=\"4\">Country</th>'
+  html += '<th data-sort="string" rowspan=\"2\">Registy</th>'
+  html += '</tr>'
+  html += '<tr>'
+  html += '<th data-sort="string">Address</th>'
+  html += '<th data-sort="string">Prefix</th>'
+  html += '<th data-sort="string">Type</th>'
+  html += '<th>Flag</th>'
+  html += '<th data-sort="string">Code</th>'
+  html += '<th data-sort="string">Name</th>'
+  html += '<th data-sort="string">Area</th>'
+  html += '</tr>'
+  return html
+
+resultRows = (data) ->
+  rows = new Array
+  bkeyword = ''
+  for row in data
+    html = ''
+    if bkeyword == row.input_value
+      keywordName = ''
+    else
+      keywordName = 'name="keywordPoint"'
+      bkeyword = row.input_value
+    regInfo = "Status:&nbsp;#{row.status}<br />"
+    regInfo += "Date:&nbsp;#{row.date}"
+    addrInfo = "From:&nbsp;#{row.start_addr}<br />"
+    addrInfo += "To:&nbsp;#{row.end_addr}<br />"
+    addrInfo += "Count: #{row.value}"
+    
+    html += '<tr>'
+    html += "<td class=\"col_keyword\" #{keywordName}>#{row.input_value}</td>"
+    html += "<td class=\"col_address\" title=\"#{addrInfo}\">#{row.start_addr}</td>"
+    html += "<td class=\"col_prefix\" style=\"text-align:right;\" title=\"#{addrInfo}\">#{row.prefix}</td>"
+    html += "<td class=\"col_type\">#{row.data_type}</td>"
+    if row.country != null && row.country.length > 0
+      html += "<td class=\"col_flag\" ><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.flag_filename}.png\" /></td>"
+      html += "<td class=\"col_country_code\">#{row.cc}</td>"
+      html += "<td class=\"col_country\">#{row.country}(#{row.country_ja})</td>"
+      html += "<td class=\"col_area\">#{row.area}</td>"
+    else
+      html += '<td class=\"col_flag\"></td>'
+      html += "<td class=\"col_country_code\">#{row.cc}</td>"
+      html += '<td class=\"col_country\"></td>'
+      html += "<td class=\"col_area\">#{row.area}</td>"
+    html += "<td class=\"col_registry\" title=\"#{regInfo}\">#{row.registry}</td>"
+    html += '</tr>'
+    rows.push(html)
+  return rows
 
 keywordLink = ->
   words = $('#statistics_record_start_addr').val().split(',')
@@ -59,67 +136,24 @@ keywordLink = ->
 
 keywordLinkClick = ->
   $('#keywordLinks > .keywordLink').click ->
-    point = $('.keywordPoint:contains("' + $(this).text() + '")').offset().top
+    point = $('[name=keywordPoint]:contains("' + $(this).text() + '")').offset().top
     $('html,body').animate({scrollTop: point}, 'fast')
 
-writeData = (data) ->
-  cnt = 0
-  bkeyword = ''
-  if data.length > 0
-    html = '<table id="sirdtable">'
-    html += '<thead>'
-    html += '<tr>'
-    html += '<th data-sort="string" rowspan=\"2\">Keyword</th>'
-    html += '<th colspan=\"3\">Address</th>'
-    html += '<th colspan=\"4\">Country</th>'
-    html += '<th data-sort="string" rowspan=\"2\">Registy</th>'
-    html += '</tr>'
-    html += '<tr>'
-    html += '<th data-sort="string">Address</th>'
-    html += '<th data-sort="string">Prefix</th>'
-    html += '<th data-sort="string">Type</th>'
-    html += '<th>Flag</th>'
-    html += '<th data-sort="string">Code</th>'
-    html += '<th data-sort="string">Name</th>'
-    html += '<th data-sort="string">Area</th>'
-    html += '</tr>'
-    html += '</thead>'
-    html += '<tbody>'
-    for row, i in data
-      if bkeyword == row.input_value
-        keywordClass = ''
-      else
-        keywordClass = 'class="keywordPoint"'
-        bkeyword = row.input_value
-      regInfo = "Status:&nbsp;#{row.status}<br />"
-      regInfo += "Date:&nbsp;#{row.date}"
-      addrInfo = "From:&nbsp;#{row.start_addr}<br />"
-      addrInfo += "To:&nbsp;#{row.end_addr}<br />"
-      addrInfo += "Count: #{row.value}"
-      
-      html += "<tr>"
-      html += "<td #{keywordClass}>#{row.input_value}</td>"
-      html += "<td title=\"#{addrInfo}\">#{row.start_addr}</td>"
-      html += "<td style=\"text-align:right;\" title=\"#{addrInfo}\">#{row.prefix}</td>"
-      html += "<td>#{row.data_type}</td>"
-      if row.country != null && row.country.length > 0
-        html += "<td><img alt=\"\" src=\"/assets/flags/shiny/24/#{row.flag_filename}.png\" /></td>"
-        html += "<td>#{row.cc}</td>"
-        html += "<td>#{row.country}(#{row.country_ja})</td>"
-        html += "<td>#{row.area}</td>"
-      else
-        html += "<td></td>"
-        html += "<td>#{row.cc}</td>"
-        html += "<td></td>"
-        html += "<td>#{row.area}</td>"
-      html += "<td title=\"#{regInfo}\">#{row.registry}</td>"
-      html += '</tr>'
-      ++cnt
-    html += '</tbody>'
-    html += '</table>'
-    cntHtml = '<p>検索結果:&nbsp;' + cnt.toString().replace(/^(-?\d+)(\d{3})/, "$1,$2") + '&nbsp;件</p>'
-    $('#data').html(cntHtml + keywordLink() + html)
-    $('#sirdtable').stupidtable()
-    keywordLinkClick()
-  else
-    $('#data').html('<p>No Data.</p>')
+iptableDialog = ->
+  iptableDialogClick()
+  $('#iptable_dialog').dialog
+    autoOpen: false,
+    modal: false,
+    title: 'Command for iptables',
+    height: 300,
+    width: 550,
+    position: [50, 220]
+
+iptableDialogClick = ->
+  $('#ipt_ipv4block').click ->
+    command = ''
+    $('#sirtable_body > tr').each ->
+      if $(this).children('.col_type').text() == 'ipv4'
+        command += "iptables -A INPUT -s #{$(this).children('.col_address').text()}/#{$(this).children('.col_prefix').text()} -j DROP ;\n"
+    $('#ipt_command').val(command)
+    $('#iptable_dialog').dialog('open')
