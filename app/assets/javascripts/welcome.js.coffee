@@ -19,6 +19,9 @@ $ ->
   $('#search_statistics_record').submit ->
     $('#country_dialog').dialog('close')
   
+  $('#search_reset').click ->
+    $('#statistics_record_start_addr').focus()
+  
   countryDialog()
 
 countryDialog = ->

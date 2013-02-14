@@ -22,6 +22,7 @@
   <label>Keyword: <%= f.text_field :start_addr, :title => 'キーワードはIPv4、ASNコード、カントリーコード(ISO3166-1 alpha-2)を入力可能です。<br />複数のキーワードをカンマ区切りで複数入力できます。'%></label>
   [<a id="select_country" href="javascript:void(0);" title="カントリーコードの選択画面を開く">Country</a>]
   <%= f.submit "Search" %>
+  <input type="reset" id="search_reset" name="search_reset" value="Reset" />
   <% end %>
 
   <div id="country_dialog">
