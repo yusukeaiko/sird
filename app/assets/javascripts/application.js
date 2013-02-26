@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
+//= require jquery.ui.tooltip
+//= require jquery.ui.dialog
 //= require_tree .
 
 $(function() {
