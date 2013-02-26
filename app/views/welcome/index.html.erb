@@ -1,21 +1,16 @@
 <section id="info">
-  <% @versions.each_with_index do |ver, i| %>
+  <% @registries.each do |reg| %>
   <dl>
-    <dt><%= ver.registry.registry.upcase %><br />Data Status:</dt>
-    <dd>Version: <%= ver.version %></dd>
-    <dd>Serial: <%= ver.serial %></dd>
-    <dd>Update: <%= ver.enddate %></dd>
-  </dl>
-  <% end %>
-<% if false %>
-  <dl>
-    <dt>Include Data Count:</dt>
-    <% @summaries.each do |sum| %>
-    <dd><%= sum.data_type %>: <%= sum.count %></dd>
+    <dt><%= reg.registry.upcase %><br />Data Status:</dt>
+    <dd>Version: <%= reg.statistics_version.version %></dd>
+    <dd>Serial: <%= reg.statistics_version.serial %></dd>
+    <dd>Update: <%= reg.statistics_version.enddate %></dd>
+    <dd>Records: <%= number_with_delimiter(reg.statistics_version.records, :delimiter => ',', :separator => '.') %></dd>
+    <% reg.statistics_summary.each do |sum| %>
+      <dd><%= sum.data_type %>: <%= number_with_delimiter(sum.count, :delimiter => ',', :separator => '.') %></dd>
     <% end %>
   </dl>
-<% end %>
-</section>
+  <% end %>
 
 <section id="search">
   <%= form_for(@records, :url => {:controller => 'statistics_records', :action => 'index.json'}, :html => {:class => 'search_statistics_record', :id => 'search_statistics_record'}, :remote => true) do |f| %>

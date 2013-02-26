@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 class WelcomeController < ApplicationController
   def index
-    @versions = StatisticsVersion.all
-    @summaries = StatisticsSummary.all
+    @registries = Registry.find(:all, :include => [:statistics_version, :statistics_summary])
     @records = StatisticsRecord.new
     @countries = Country.all
 
