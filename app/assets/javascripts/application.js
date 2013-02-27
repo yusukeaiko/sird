@@ -50,4 +50,3 @@ $(function() {
     $('#api:visible').removeAttr('style').fadeOut();
   });
 });
-

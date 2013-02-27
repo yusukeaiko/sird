@@ -8,77 +8,84 @@ section {
   clear: both;
 }
 
-section#info dl {
-  width: 150px;
-  margin-right: 10px;
-  font-size: small;
-  float: left;
-  clear: right;
-}
-section#info dl dt {
-  line-height: 1.4em;
-  font-weight: bold;
-}
-section#info dl dd {
-  line-height: 1.2em;
-}
-
-Section#search p.description {
-  font-size: x-small;
+section#info {
+  dl {
+    width: 150px;
+    margin-right: 10px;
+    font-size: small;
+    float: left;
+    clear: right;
+    dt {
+      line-height: 1.4em;
+      font-weight: bold;
+    }
+    dd {
+      line-height: 1.2em;
+    }
+  }
 }
 
-section#data dl#keywordLinks {
-  width: 100%;
-  float: left;
-}
-section#data dl#keywordLinks dt {
-  padding-right: 5px;
-  float: left
-}
-section#data dl#keywordLinks dd {
-  margin-right: 5px;
-  padding: 2px;
-  font-size: small;
-  line-height:1em;
-  border: 1px solid gainsboro;
-  background-color: WhiteSmoke;
-  float: left;
-  cursor: pointer;
+Section#search {
+  p.description {
+    font-size: x-small;
+  }
 }
 
-section#data table {
-  border-spacing: 0;
-  empty-cell: show;
-}
-section#data table tr:hover {
-  background-color: mistyrose;
-}
-section#data table tr th,
-section#data table tr td {
-  padding: 5px;
-  border: 1px solid lightgray;
-  color: black;
-}
-section#data table tr th {
-  text-align: center;
-  background-color: lightsteelblue;
-}
-section#data table tr td img {
-  float: left;
+section#data {
+  dl#keywordLinks {
+    width: 100%;
+    float: left;
+    dt {
+      padding-right: 5px;
+      float: left
+    }
+    dd {
+      margin-right: 5px;
+      padding: 2px;
+      font-size: small;
+      line-height:1em;
+      border: 1px solid gainsboro;
+      background-color: WhiteSmoke;
+      float: left;
+      cursor: pointer;
+    }
+  }
+  table {
+    border-spacing: 0;
+    empty-cell: show;
+    tr:hover {
+      background-color: mistyrose;
+    }
+    tr th,
+    tr td {
+      padding: 5px;
+      border: 1px solid lightgray;
+      color: black;
+    }
+    tr th {
+      text-align: center;
+      background-color: lightsteelblue;
+    }
+    tr td img {
+      float: left;
+    }
+  }
 }
 
-section#ref dl {
-  font-size: small;
-  float: left;
-}
-section#ref dl dt {
-  padding-right: 5px;
-  font-weight: bold;
-  float: left
-}
-section#ref dl dd {
-  padding-right: 5px;
-  float: left
+section#ref {
+  dl {
+    font-size: small;
+    float: left;
+    dt {
+      padding-right: 5px;
+      font-weight: bold;
+      float: left;
+    }
+    dd {
+      padding-right: 5px;
+      float: left;
+    }
+  }
 }
 
 dl#type_select {
@@ -87,35 +94,34 @@ dl#type_select {
   font-size: small;
   float: left;
   clear: both;
-}
-dl#type_select dt {
-  font-weight: bold;
-  width: 9em;
-  float: left;
-}
-dl#type_select dd {
-  width: 200px;
-  float: left;
+  dt {
+    font-weight: bold;
+    width: 9em;
+    float: left;
+  }
+  dd {
+    width: 200px;
+    float: left;
+  }
 }
 
 div.ui-dialog-titlebar {
   font-size: small;
 }
 
-#country_dialog table,
-#country_dialog table th,
-#country_dialog table td {
-  font-size: small;
-}
-
-#country_dialog table th,
-#country_dialog table td {
-  font-size: small;
-  padding: 2px;
-}
-
-#country_dialog table th {
-  font-weight: bold;
+#country_dialog {
+  table,
+  table th,
+  table td {
+    font-size: small;
+  }
+  table th,
+  table td {
+    padding: 2px;
+  }
+  table th {
+    font-weight: bold;
+  }
 }
 
 #ipt_command {
