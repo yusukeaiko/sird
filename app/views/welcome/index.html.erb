@@ -1,17 +1,3 @@
-<section id="info">
-  <% @registries.each do |reg| %>
-  <dl>
-    <dt><%= reg.registry.upcase %><br />Data Status:</dt>
-    <dd>Version: <%= reg.statistics_version.version %></dd>
-    <dd>Serial: <%= reg.statistics_version.serial %></dd>
-    <dd>Update: <%= reg.statistics_version.enddate %></dd>
-    <dd>Records: <%= number_with_delimiter(reg.statistics_version.records, :delimiter => ',', :separator => '.') %></dd>
-    <% reg.statistics_summary.each do |sum| %>
-      <dd><%= sum.data_type %>: <%= number_with_delimiter(sum.count, :delimiter => ',', :separator => '.') %></dd>
-    <% end %>
-  </dl>
-  <% end %>
-
 <section id="search">
   <%= form_for(@records, :url => {:controller => 'statistics_records', :action => 'index.json'}, :html => {:class => 'search_statistics_record', :id => 'search_statistics_record'}, :remote => true) do |f| %>
   <label>Keyword: <%= f.text_field :start_addr, :title => 'キーワードはIPv4、ASNコード、カントリーコード(ISO3166-1 alpha-2)を入力可能です。<br />複数のキーワードをカンマ区切りで複数入力できます。'%></label>
@@ -60,5 +46,5 @@
     <dd><a href="http://www.apnic.net/" title="Asia-Pacific Network Information Centre " target="_blank">APNIC</a></dd>
     <dd><a href="http://www.lacnic.net/" title="Latin American and Caribbean Internet Address Registry" target="_blank">LACNIC</a></dd>
     <dd><a href="http://www.afrinic.net/" title="African Network Information Centre" target="_blank">AfriNIC</a></dd>
-  </dl>
+  </Dl>
 </section>

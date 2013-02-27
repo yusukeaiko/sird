@@ -6,7 +6,7 @@ class StatisticsRecordsController < ApplicationController
     val = ''
     if params.key?(:start_addr) then
       val = params[:start_addr]
-    elsif params.key?(:statistics_record) then
+    elsif params.key?(:statistics_record) && params[:statistics_record].key?(:start_addr) then
       val = params[:statistics_record][:start_addr]
     end
 

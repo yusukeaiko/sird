@@ -54,12 +54,13 @@ writeResult = (data) ->
     html += rows.join('')
     html += '</tbody></table>'
     # 結果件数
-    cntHtml = '<p>検索結果:&nbsp;' + rows.length.toString().replace(/^(-?\d+)(\d{3})/, "$1,$2") + '&nbsp;件&nbsp;'
-    cntHtml += '<input type="button" id="ipt_ipv4block" name="ipt_ipv4block" value="IPv4アドレスをブロック" title="検索結果のIPv4アドレスを全てブロックするレシピを生成する。" /></p>'
+    rsltHtml = '<dl id="keywordLinks"><dt>検索結果:&nbsp;' + rows.length.toString().replace(/^(-?\d+)(\d{3})/, "$1,$2") + '&nbsp;件</dt>'
+    rsltHtml += keywordLink() + '</dl>'
     # iptables向け処理ボタン
-    iptHtml = '<div id="iptable_dialog"><p>検索結果のIPv4アドレスを全てブロックするレシピ</p><textarea id="ipt_command"></textarea></div>'
+    iptHtml = '<div><input type="button" id="ipt_ipv4block" name="ipt_ipv4block" value="IPv4アドレスをブロック" title="検索結果のIPv4アドレスを全てブロックするiptablesのレシピを生成する。" />'
+    iptHtml += '<div id="iptable_dialog"><p>検索結果のIPv4アドレスを全てブロックするレシピ</p><textarea id="ipt_command"></textarea></div></div>'
     # 結合して書き出し
-    $('#data').html(cntHtml + keywordLink() + iptHtml + html)
+    $('#data').html(rsltHtml + iptHtml + html)
     $('#sirdtable').stupidtable()
     # キーワードリンククリックイベント処理
     keywordLinkClick()
@@ -128,10 +129,8 @@ keywordLink = ->
   words = jQuery.unique(words)
   html = ''
   if words.length > 0
-    html = '<dl id="keywordLinks"><dt>Keyword Links :: </dt>'
     for word in words
       html += "<dd class=\"keywordLink\">#{word}</dd>"
-    html += '</dl>'
   return html
 
 keywordLinkClick = ->

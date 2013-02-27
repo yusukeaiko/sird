@@ -2,7 +2,7 @@ html {
   overflow-y: scroll;
 }
 
-body, header, footer, section, div,
+body, header, footer, section, nav, div,
 dl, dt, dd, ul, ol, li,
 h1, h2, h3, h4, h5, h6,
 form, fieldset, input, textarea,

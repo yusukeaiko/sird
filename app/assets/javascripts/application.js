@@ -12,15 +12,42 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.tooltip
-//= require jquery.ui.dialog
+//= require jquery.ui.all
 //= require_tree .
 
 $(function() {
+  // Tooltip
   $(document).tooltip();
-  
+
+  // Top page button
   $('#pagetop').click(function() {
     $('html,body').animate({scrollTop: 0}, 'fast');
     return false;
   });
+
+  // Global Nav :: About
+  $('#about-show').click(function() {
+    $('#api:visible').removeAttr('style').fadeOut();
+    if ($('#about:visible').size() > 0) {
+      $('#about:visible').removeAttr('style').fadeOut();
+    } else {
+      $('#about').show('blind', {percent: 100}, 'fast');
+    }
+  });
+  $('#about-close').click(function() {
+    $('#about:visible').removeAttr('style').fadeOut();
+  });
+  // Global Nav :: API
+  $('#api-show').click(function() {
+    $('#about:visible').removeAttr('style').fadeOut();
+    if ($('#api:visible').size() > 0) {
+      $('#api:visible').removeAttr('style').fadeOut();
+    } else {
+      $('#api').show('blind', {percent: 100}, 'fast');
+    }
+  });
+  $('#api-close').click(function() {
+    $('#api:visible').removeAttr('style').fadeOut();
+  });
 });
+
