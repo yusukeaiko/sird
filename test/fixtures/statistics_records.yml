@@ -1,25 +1,29 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  registry: MyString
-  cc: MyString
+  registry_id: 1
+  country_id: 1
   data_type: MyString
-  start: MyString
-  value: 1
+  start_addr: MyString
+  end_addr: MyString
+  value: MyString
+  prefix: 1
   date: MyString
   status: MyString
-  extensions: 
-  start_addr_dec: 
-  end_addr_dec: 1
+  extensions: MyString
+  start_addr_dec: MyString
+  end_addr_dec: MyString
 
 two:
-  registry: MyString
-  cc: MyString
+  registry_id: 1
+  country_id: 1
   data_type: MyString
-  start: MyString
-  value: 1
+  start_addr: MyString
+  end_addr: MyString
+  value: MyString
+  prefix: 1
   date: MyString
   status: MyString
-  extensions: 
-  start_addr_dec: 
-  end_addr_dec: 1
+  extensions: MyString
+  start_addr_dec: MyString
+  end_addr_dec: MyString

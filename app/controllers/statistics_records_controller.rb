@@ -1,77 +1,51 @@
-# -*- coding: utf-8 -*-
 class StatisticsRecordsController < ApplicationController
+  before_action :set_statistics_record, only: [:show, :edit, :update, :destroy]
+
   # GET /statistics_records
   # GET /statistics_records.json
   def index
-    val = ''
-    if params.key?(:start_addr) then
-      val = params[:start_addr]
-    elsif params.key?(:statistics_record) && params[:statistics_record].key?(:start_addr) then
-      val = params[:statistics_record][:start_addr]
-    end
-
-    @statistics_records = StatisticsRecord.search(val)
-
-    respond_to do |format|
-      # format.html # index.html.erb
-      format.json { render json: @statistics_records }
-    end
+    @statistics_records = StatisticsRecord.all
   end
-=begin
+
   # GET /statistics_records/1
   # GET /statistics_records/1.json
   def show
-    @statistics_record = StatisticsRecord.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @statistics_record }
-    end
   end
 
   # GET /statistics_records/new
-  # GET /statistics_records/new.json
   def new
     @statistics_record = StatisticsRecord.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @statistics_record }
-    end
   end
 
   # GET /statistics_records/1/edit
   def edit
-    @statistics_record = StatisticsRecord.find(params[:id])
   end
 
   # POST /statistics_records
   # POST /statistics_records.json
   def create
-    @statistics_record = StatisticsRecord.new(params[:statistics_record])
+    @statistics_record = StatisticsRecord.new(statistics_record_params)
 
     respond_to do |format|
       if @statistics_record.save
         format.html { redirect_to @statistics_record, notice: 'Statistics record was successfully created.' }
-        format.json { render json: @statistics_record, status: :created, location: @statistics_record }
+        format.json { render action: 'show', status: :created, location: @statistics_record }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @statistics_record.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /statistics_records/1
-  # PUT /statistics_records/1.json
+  # PATCH/PUT /statistics_records/1
+  # PATCH/PUT /statistics_records/1.json
   def update
-    @statistics_record = StatisticsRecord.find(params[:id])
-
     respond_to do |format|
-      if @statistics_record.update_attributes(params[:statistics_record])
+      if @statistics_record.update(statistics_record_params)
         format.html { redirect_to @statistics_record, notice: 'Statistics record was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @statistics_record.errors, status: :unprocessable_entity }
       end
     end
@@ -80,13 +54,21 @@ class StatisticsRecordsController < ApplicationController
   # DELETE /statistics_records/1
   # DELETE /statistics_records/1.json
   def destroy
-    @statistics_record = StatisticsRecord.find(params[:id])
     @statistics_record.destroy
-
     respond_to do |format|
       format.html { redirect_to statistics_records_url }
       format.json { head :no_content }
     end
   end
-=end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_statistics_record
+      @statistics_record = StatisticsRecord.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def statistics_record_params
+      params.require(:statistics_record).permit(:registry_id, :country_id, :data_type, :start_addr, :end_addr, :value, :prefix, :date, :status, :extensions, :start_addr_dec, :end_addr_dec)
+    end
 end

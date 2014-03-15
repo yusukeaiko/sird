@@ -4,6 +4,6 @@ IPアドレスリストファイル内に格納されているバージョンレ
 データはianaモジュールによって投入されます。
 =end
 class StatisticsVersion < ActiveRecord::Base
-  attr_accessible :UTCoffset, :enddate, :records, :registry_id, :serial, :startdate, :version
+  #attr_accessible :UTCoffset, :enddate, :records, :registry_id, :serial, :startdate, :version
   belongs_to :registry
 end

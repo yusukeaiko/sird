@@ -12,44 +12,52 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :registry %><br />
-    <%= f.text_field :registry %>
+    <%= f.label :registry_id %><br>
+    <%= f.number_field :registry_id %>
   </div>
   <div class="field">
-    <%= f.label :cc %><br />
-    <%= f.text_field :cc %>
+    <%= f.label :country_id %><br>
+    <%= f.number_field :country_id %>
   </div>
   <div class="field">
-    <%= f.label :data_type %><br />
+    <%= f.label :data_type %><br>
     <%= f.text_field :data_type %>
   </div>
   <div class="field">
-    <%= f.label :start %><br />
-    <%= f.text_field :start %>
+    <%= f.label :start_addr %><br>
+    <%= f.text_field :start_addr %>
   </div>
   <div class="field">
-    <%= f.label :value %><br />
-    <%= f.number_field :value %>
+    <%= f.label :end_addr %><br>
+    <%= f.text_field :end_addr %>
   </div>
   <div class="field">
-    <%= f.label :date %><br />
+    <%= f.label :value %><br>
+    <%= f.text_field :value %>
+  </div>
+  <div class="field">
+    <%= f.label :prefix %><br>
+    <%= f.number_field :prefix %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
     <%= f.text_field :date %>
   </div>
   <div class="field">
-    <%= f.label :status %><br />
+    <%= f.label :status %><br>
     <%= f.text_field :status %>
   </div>
   <div class="field">
-    <%= f.label :extensions %><br />
+    <%= f.label :extensions %><br>
     <%= f.text_field :extensions %>
   </div>
   <div class="field">
-    <%= f.label :start_addr_dec %><br />
+    <%= f.label :start_addr_dec %><br>
     <%= f.text_field :start_addr_dec %>
   </div>
   <div class="field">
-    <%= f.label :end_addr_dec %><br />
-    <%= f.number_field :end_addr_dec %>
+    <%= f.label :end_addr_dec %><br>
+    <%= f.text_field :end_addr_dec %>
   </div>
   <div class="actions">
     <%= f.submit %>

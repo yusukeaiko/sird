@@ -1,55 +1,64 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Registry:</b>
-  <%= @statistics_record.registry %>
+  <strong>Registry:</strong>
+  <%= @statistics_record.registry_id %>
 </p>
 
 <p>
-  <b>Cc:</b>
-  <%= @statistics_record.cc %>
+  <strong>Country:</strong>
+  <%= @statistics_record.country_id %>
 </p>
 
 <p>
-  <b>Data type:</b>
+  <strong>Data type:</strong>
   <%= @statistics_record.data_type %>
 </p>
 
 <p>
-  <b>Start:</b>
-  <%= @statistics_record.start %>
+  <strong>Start addr:</strong>
+  <%= @statistics_record.start_addr %>
 </p>
 
 <p>
-  <b>Value:</b>
+  <strong>End addr:</strong>
+  <%= @statistics_record.end_addr %>
+</p>
+
+<p>
+  <strong>Value:</strong>
   <%= @statistics_record.value %>
 </p>
 
 <p>
-  <b>Date:</b>
+  <strong>Prefix:</strong>
+  <%= @statistics_record.prefix %>
+</p>
+
+<p>
+  <strong>Date:</strong>
   <%= @statistics_record.date %>
 </p>
 
 <p>
-  <b>Status:</b>
+  <strong>Status:</strong>
   <%= @statistics_record.status %>
 </p>
 
 <p>
-  <b>Extensions:</b>
+  <strong>Extensions:</strong>
   <%= @statistics_record.extensions %>
 </p>
 
 <p>
-  <b>Start addr dec:</b>
+  <strong>Start addr dec:</strong>
   <%= @statistics_record.start_addr_dec %>
 </p>
 
 <p>
-  <b>End addr dec:</b>
+  <strong>End addr dec:</strong>
   <%= @statistics_record.end_addr_dec %>
 </p>
-
 
 <%= link_to 'Edit', edit_statistics_record_path(@statistics_record) %> |
 <%= link_to 'Back', statistics_records_path %>

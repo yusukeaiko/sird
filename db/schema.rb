@@ -9,42 +9,42 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130130120133) do
+ActiveRecord::Schema.define(version: 20140304152038) do
 
-  create_table "countries", :force => true do |t|
-    t.string   "numeric",                 :null => false
-    t.string   "alpha3",                  :null => false
-    t.string   "alpha2",                  :null => false
-    t.string   "country_name",            :null => false
+  create_table "countries", force: true do |t|
+    t.string   "numeric",                 null: false
+    t.string   "alpha3",                  null: false
+    t.string   "alpha2",                  null: false
+    t.string   "country_name",            null: false
     t.string   "country_name_ja"
     t.string   "area"
     t.string   "administrative_division"
     t.string   "flag_filename"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "countries", ["alpha2"], :name => "index_countries_on_alpha2", :unique => true
-  add_index "countries", ["alpha3"], :name => "index_countries_on_alpha3", :unique => true
-  add_index "countries", ["numeric"], :name => "index_countries_on_numeric", :unique => true
+  add_index "countries", ["alpha2"], name: "index_countries_on_alpha2", unique: true
+  add_index "countries", ["alpha3"], name: "index_countries_on_alpha3", unique: true
+  add_index "countries", ["numeric"], name: "index_countries_on_numeric", unique: true
 
-  create_table "registries", :force => true do |t|
-    t.string   "registry",                   :null => false
-    t.string   "regional_internet_registry", :null => false
-    t.string   "cover_area",                 :null => false
-    t.string   "uri",                        :null => false
-    t.string   "data_uri",                   :null => false
-    t.string   "data_file",                  :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+  create_table "registries", force: true do |t|
+    t.string   "registry",                   null: false
+    t.string   "regional_internet_registry", null: false
+    t.string   "cover_area",                 null: false
+    t.string   "uri",                        null: false
+    t.string   "data_uri",                   null: false
+    t.string   "data_file",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "registries", ["registry"], :name => "index_registries_on_registry", :unique => true
+  add_index "registries", ["registry"], name: "index_registries_on_registry", unique: true
 
-  create_table "statistics_records", :force => true do |t|
-    t.integer  "registry_id",    :null => false
+  create_table "statistics_records", force: true do |t|
+    t.integer  "registry_id",    null: false
     t.integer  "country_id"
     t.string   "data_type"
     t.string   "start_addr"
@@ -52,43 +52,37 @@ ActiveRecord::Schema.define(:version => 20130130120133) do
     t.string   "value"
     t.integer  "prefix"
     t.string   "date"
-    t.string   "status",         :null => false
+    t.string   "status",         null: false
     t.string   "extensions"
     t.string   "start_addr_dec"
     t.string   "end_addr_dec"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "statistics_records", ["country_id"], :name => "index_statistics_records_on_country_id"
-  add_index "statistics_records", ["end_addr_dec"], :name => "index_statistics_records_on_end_addr_dec"
-  add_index "statistics_records", ["registry_id"], :name => "index_statistics_records_on_registry_id"
-  add_index "statistics_records", ["start_addr_dec"], :name => "index_statistics_records_on_start_addr_dec"
-  add_index "statistics_records", ["value"], :name => "index_statistics_records_on_value"
-
-  create_table "statistics_summaries", :force => true do |t|
-    t.integer  "registry_id", :null => false
-    t.string   "data_type",   :null => false
+  create_table "statistics_summaries", force: true do |t|
+    t.integer  "registry_id", null: false
+    t.string   "data_type",   null: false
     t.integer  "count"
     t.string   "summary"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "statistics_summaries", ["registry_id"], :name => "index_statistics_summaries_on_registry_id"
+  add_index "statistics_summaries", ["registry_id"], name: "index_statistics_summaries_on_registry_id"
 
-  create_table "statistics_versions", :force => true do |t|
-    t.string   "version",     :null => false
-    t.integer  "registry_id", :null => false
-    t.integer  "serial",      :null => false
-    t.integer  "records",     :null => false
+  create_table "statistics_versions", force: true do |t|
+    t.string   "version",     null: false
+    t.integer  "registry_id", null: false
+    t.integer  "serial",      null: false
+    t.integer  "records",     null: false
     t.string   "startdate"
     t.string   "enddate"
     t.string   "UTCoffset"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "statistics_versions", ["registry_id"], :name => "index_statistics_versions_on_registry_id"
+  add_index "statistics_versions", ["registry_id"], name: "index_statistics_versions_on_registry_id"
 
 end
