@@ -1,0 +1,39 @@
+<div id="country_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <%= content_tag(:h4, 'カントリーコード選択', { :class => 'modal-title' }) %>
+      </div>
+      <div class="modal-body">
+        <dl id="type_select">
+          <dt>アドレスタイプ:</dt>
+          <dd>
+            <label><input type="checkbox" value="asn" name="addr_type" />ASN</label>
+            <label><input type="checkbox" value="ipv4" name="addr_type" />IPv4</label>
+            <label><input type="checkbox" value="ipv6" name="addr_type" />IPv6</label>
+          </dd>
+        </dl>
+        <table class="table table-striped">
+          <tbody>
+            <% @countries.each do |country| %>
+              <tr>
+                <td>
+                  <%= button_tag('ADD', {:id => "country_add_#{country.alpha2}", :name => 'country_add', :class => 'btn btn-default btn-xs', :type => :button}) %>
+                  <input type="hidden" value="<%= country.alpha2 %>" />
+                </td>
+                <td><img alt="" src="/assets/flags/shiny/16/<%= country.flag_filename %>.png" /></td>
+                <td name="country_code"><%= country.alpha2 %></td>
+                <td><%= country.country_name %>(<%= country.country_name_ja %>)</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

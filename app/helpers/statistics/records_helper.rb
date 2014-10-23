@@ -1,0 +1,2 @@
+module Statistics::RecordsHelper
+end

@@ -6,6 +6,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
 Registry.create(:registry => 'ARIN', :regional_internet_registry => 'American Registry for Internet Numbers', :cover_area => '北アメリカ', :uri => 'https://www.arin.net/', :data_uri => 'ftp://ftp.arin.net/pub/stats/arin/', :data_file => 'delegated-arin-extended-latest')
 Registry.create(:registry => 'RIPE NCC', :regional_internet_registry => 'RIPE Network Coordination Centre', :cover_area => 'ヨーロッパ,中東,中央アジア', :uri => 'http://www.ripe.net/', :data_uri => 'ftp://ftp.ripe.net/pub/stats/ripencc/', :data_file => 'delegated-ripencc-extended-latest')
 Registry.create(:registry => 'APNIC', :regional_internet_registry => 'Asia-Pacific Network Information Centre', :cover_area => 'アジア,太平洋地域', :uri => 'http://www.apnic.net/', :data_uri => 'ftp://ftp.apnic.net/apnic/stats/apnic/', :data_file => 'delegated-apnic-extended-latest')
@@ -261,4 +262,3 @@ Country.create(:numeric => '175', :alpha3 => 'MYT', :alpha2 => 'YT', :country_na
 Country.create(:numeric => '710', :alpha3 => 'ZAF', :alpha2 => 'ZA', :country_name => 'South Africa', :country_name_ja => '南アフリカ', :area => '南アフリカ', :administrative_division => 'ISO 3166-2:ZA', :flag_filename => 'South-Africa')
 Country.create(:numeric => '894', :alpha3 => 'ZMB', :alpha2 => 'ZM', :country_name => 'Zambia', :country_name_ja => 'ザンビア', :area => '南アフリカ', :administrative_division => 'ISO 3166-2:ZM', :flag_filename => 'Zambia')
 Country.create(:numeric => '716', :alpha3 => 'ZWE', :alpha2 => 'ZW', :country_name => 'Zimbabwe', :country_name_ja => 'ジンバブエ', :area => '南アフリカ', :administrative_division => 'ISO 3166-2:ZW', :flag_filename => 'Zimbabwe')
-

@@ -1,1 +1,0 @@
-json.extract! @statistics_record, :id, :registry_id, :country_id, :data_type, :start_addr, :end_addr, :value, :prefix, :date, :status, :extensions, :start_addr_dec, :end_addr_dec, :created_at, :updated_at

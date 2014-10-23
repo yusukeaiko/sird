@@ -1,14 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sird</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <title>Statistics on Internet Resource Distribution</title>
+  <meta name="robots" content="nofollow" />
+  <meta name="keywords" content="IP Address,IPアドレス,IPv4,IPv6,RIR,statistics,ISO 3166,JIS X 0304,Country Code,国コード,カントリーコード" />
+  <meta name="description" content="IPアドレスやカントリーコードからRIRへの登録状況を確認できます。" />
+  <%= favicon_link_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<header>
+  <%= render('layouts/nav') %>
+  <h1>Statistics on Internet Resource Distribution</h1>
+</header>
+
+<!-- Tab panes -->
+<div id="menu_contents" class="tab-content">
+  <div class="tab-pane active" id="search">
+    <%= yield %>
+  </div>
+  <div class="tab-pane" id="data_status">
+    <%= render('layouts/data_status') %>
+  </div>
+  <div class="tab-pane" id="api">
+    <%= render('layouts/api') %>
+  </div>
+  <div class="tab-pane" id="about">
+    <%= render('layouts/about') %>
+  </div>
+</div>
+<div id="pagetop"><%= content_tag(:span, nil, {:class => "glyphicon glyphicon-chevron-up" }) %> Page Top</div>
+
+<footer>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <ul id="nic_link">
+        <li>Original Data Links:</li>
+        <li><%= link_to('IANA', 'http://www.iana.org/', {:title => 'Internet Assigned Numbers Authority', :target => :_blank}) %></li>
+        <li><%= link_to('ARIN', 'https://www.arin.net/', {:title => 'American Registry for Internet Numbers', :target => :_blank}) %></li>
+        <li><%= link_to('RIPE', 'http://www.ripe.net/', {:title => 'RIPE Network Coordination Centre', :target => :_blank}) %></li>
+        <li><%= link_to('APNIC', 'http://www.apnic.net/', {:title => 'Asia-Pacific Network Information Centre', :target => :_blank}) %></li>
+        <li><%= link_to('LACNIC', 'http://www.lacnic.net/', {:title => 'Latin American and Caribbean Internet Address Registry', :target => :_blank}) %></li>
+        <li><%= link_to('AFRINIC', 'http://www.afrinic.net/', {:title => 'African Network Information Centre', :target => :_blank}) %></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      &copy;&nbsp;<%= Time.now.year %>&nbsp;
+      <a href="https://twitter.com/VitSymty" title="管理者のつぶやき" target="_blank">VitSymty@twitter</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>

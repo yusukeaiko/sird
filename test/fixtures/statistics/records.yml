@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  registry: 
+  country: 
+  data_type: MyString
+  start_addr: MyString
+  end_addr: MyString
+  value: MyString
+  prefix: 1
+  date: MyString
+  status: MyString
+  extensions: MyString
+  start_addr_dec: MyString
+  end_addr_dec: MyString
+  t.string: MyString
+  : 
+
+two:
+  registry: 
+  country: 
+  data_type: MyString
+  start_addr: MyString
+  end_addr: MyString
+  value: MyString
+  prefix: 1
+  date: MyString
+  status: MyString
+  extensions: MyString
+  start_addr_dec: MyString
+  end_addr_dec: MyString
+  t.string: MyString
+  : 

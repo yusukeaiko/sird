@@ -1,0 +1,29 @@
+<%= content_tag(:h2, 'Data Status') %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <%= content_tag(:th, 'Registorer') %>
+      <%= content_tag(:th, 'Version') %>
+      <%= content_tag(:th, 'Serial') %>
+      <%= content_tag(:th, 'Update') %>
+      <%= content_tag(:th, 'Records') %>
+      <%= content_tag(:th, 'Data Num: ASN') %>
+      <%= content_tag(:th, 'Data Num: IPv4') %>
+      <%= content_tag(:th, 'Data Num: IPv6') %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @registries.each do |reg| %>
+      <tr>
+        <%= content_tag(:td, reg.registry.upcase) %>
+        <%= content_tag(:td, reg.statistics_version.version) %>
+        <%= content_tag(:td, reg.statistics_version.serial) %>
+        <%= content_tag(:td, reg.statistics_version.enddate) %>
+        <%= content_tag(:td, number_with_delimiter(reg.statistics_version.records, :delimiter => ',', :separator => '.'), {:class => 'text-right' }) %>
+        <%= content_tag(:td, number_with_delimiter(reg.statistics_summaries.where(:data_type => :asn).first.count, :delimiter => ',', :separator => '.'), {:class => 'text-right' }) %>
+        <%= content_tag(:td, number_with_delimiter(reg.statistics_summaries.where(:data_type => :ipv4).first.count, :delimiter => ',', :separator => '.'), {:class => 'text-right' }) %>
+        <%= content_tag(:td, number_with_delimiter(reg.statistics_summaries.where(:data_type => :ipv6).first.count, :delimiter => ',', :separator => '.'), {:class => 'text-right' }) %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

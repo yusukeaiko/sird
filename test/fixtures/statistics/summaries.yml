@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  registry: 
+  data_type: MyString
+  count: 1
+  summary: MyString
+
+two:
+  registry: 
+  data_type: MyString
+  count: 1
+  summary: MyString

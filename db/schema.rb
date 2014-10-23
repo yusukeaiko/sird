@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304152038) do
+ActiveRecord::Schema.define(version: 20141015144132) do
 
   create_table "countries", force: true do |t|
     t.string   "numeric",                 null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20140304152038) do
   add_index "registries", ["registry"], name: "index_registries_on_registry", unique: true
 
   create_table "statistics_records", force: true do |t|
-    t.integer  "registry_id",    null: false
+    t.integer  "registry_id"
     t.integer  "country_id"
     t.string   "data_type"
     t.string   "start_addr"
@@ -60,6 +60,10 @@ ActiveRecord::Schema.define(version: 20140304152038) do
     t.datetime "updated_at"
   end
 
+  add_index "statistics_records", ["end_addr_dec"], name: "index_statistics_records_on_end_addr_dec"
+  add_index "statistics_records", ["start_addr_dec"], name: "index_statistics_records_on_start_addr_dec"
+  add_index "statistics_records", ["value"], name: "index_statistics_records_on_value"
+
   create_table "statistics_summaries", force: true do |t|
     t.integer  "registry_id", null: false
     t.string   "data_type",   null: false
@@ -68,8 +72,6 @@ ActiveRecord::Schema.define(version: 20140304152038) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "statistics_summaries", ["registry_id"], name: "index_statistics_summaries_on_registry_id"
 
   create_table "statistics_versions", force: true do |t|
     t.string   "version",     null: false
@@ -82,7 +84,5 @@ ActiveRecord::Schema.define(version: 20140304152038) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "statistics_versions", ["registry_id"], name: "index_statistics_versions_on_registry_id"
 
 end

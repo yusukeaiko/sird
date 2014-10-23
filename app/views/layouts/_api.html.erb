@@ -1,0 +1,26 @@
+<%= content_tag(:h2, 'How to use API') %>
+検索結果を取得するためのAPIを提供しています。<br />
+<br />
+GET: http://sird.nautilus.xyz/statistics_records.json?start_addr=<i>KEYWORD</i><br />
+Return: JSON形式データ<br />
+<br />
+<table class="table table-striped">
+  <caption>JSONフォーマット</caption>
+  <thead><tr><th>項目名</th><th>データ</th></tr></thead>
+  <tbody>
+    <tr><th>cc</th><td>カントリーコード(ISO 3166-1 alpha-2)</td></tr>
+    <tr><th>date</th><td>登録日</td></tr>
+    <tr><th>registry</th><td>レジストラ(ARIN | RIPE NCC | APNIC | LACNIC | AfriNIC)</td></tr>
+    <tr><th>start_addr</th><td>開始アドレス</td></tr>
+    <tr><th>end_addr</th><td>終了アドレス</td></tr>
+    <tr><th>prefix</th><td>CIDR表現でのプレフィクス</td></tr>
+    <tr><th>value</th><td>アドレス数</td></tr>
+    <tr><th>data_type</th><td>アドレスの種類(asn | ipv4 | ipv6)</td></tr>
+    <tr><th>status</th><td>払い出しステータス</td></tr>
+    <tr><th>area</th><td>地域</td></tr>
+    <tr><th>country</th><td>国名</td></tr>
+    <tr><th>country_ja</th><td>国名(日本語)</td></tr>
+    <tr><th>flag_filename</th><td>旗アイコンファイル名</td></tr>
+    <tr><th>input_value</th><td>入力したキーワード</td></tr>
+  </tbody>
+</table>

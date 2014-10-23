@@ -1,2 +1,19 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<section class="row">
+  <div id="search" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <%= form_for(@records, :url => statistics_records_search_path(:format => :json), :html => {:class => 'form-inline', :id => 'search_statistics_record', :remote => true, :role => :form}) do |f| %>
+      <div class="form-group">
+        <label class="sr-only" for="statistics_record_start_addr">Keywords</label>
+        <%= f.text_field(:start_addr, {:class => 'form-control', :placeholder => 'Keywords', :title => 'キーワードはIPv4、ASNコード、カントリーコード(ISO3166-1 alpha-2)を入力可能です。<br />複数のキーワードをカンマ区切りで複数入力できます。'}) %>
+      </div>
+      <%= button_tag('Country Code', { :class => 'btn btn-default', :type => :button, :data => { :toggle => 'modal', :target => '#country_modal'}}) %>
+      <%= f.submit('Search', { :class => 'btn btn-primary' }) %>
+    <% end %>
+  </div>
+</section>
+
+<section class="row">
+  <div id="data" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+</section>
+
+<!-- dialog -->
+<%= render('welcome/select_country_dialog') %>
