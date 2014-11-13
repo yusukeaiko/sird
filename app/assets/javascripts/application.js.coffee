@@ -17,6 +17,10 @@
 #= require stupidtable.min
 #= require_tree .
 $(document).ready( ->
+  #Top page button
+  $('#pagetop').click( ->
+    $('html,body').animate({scrollTop: 0}, 'fast');
+  )
   select_country_dialog()
 )
 
