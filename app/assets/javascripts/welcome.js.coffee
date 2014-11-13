@@ -27,7 +27,7 @@ writeResult = (data) ->
     # iptables向け処理ボタン
     iptable = $('<div>')
     iptable = iptable.append($('<input>').attr('type', 'button').attr('id', 'ipt_ipv4block').addClass('btn btn-default').attr('name', 'ipt_ipv4block').attr('title', '検索結果のIPv4アドレスを全てブロックするiptablesのレシピを生成する。').val('IPv4アドレスをブロック'))
-    iptable = iptable.append($('<div>').attr('id', 'iptable_dialog').append($('<p>').text('検索結果のIPv4アドレスを全てブロックするレシピ')).append($('textarea').attr('id', 'ipt_command')))
+    #iptable = iptable.append($('<div>').attr('id', 'iptable_dialog').append($('<p>').text('検索結果のIPv4アドレスを全てブロックするレシピ')).append($('textarea').attr('id', 'ipt_command')))
     # 結合して書き出し
     $('#data').append(result_dl).append(iptable).append(table)
     $('#sirdtable').stupidtable()
@@ -39,15 +39,15 @@ writeResult = (data) ->
 
 resultHeader = ->
   tr = $('<tr>')
-  tr = tr.append($('<th>').attr('data-sort', 'string').text('Keyword'))
-  tr = tr.append($('<th>').attr('data-sort', 'string').text('Address'))
-  tr = tr.append($('<th>').attr('data-sort', 'string').text('Addr Prefix'))
-  tr = tr.append($('<th>').attr('data-sort', 'string').text('Addr Type'))
-  tr = tr.append($('<th>').attr('data-sort', 'string').text('Area'))
-  tr = tr.append($('<th>').attr('data-sort', 'string').text('Country Code'))
+  tr = tr.append($('<th>').attr('data-sort', 'string').html('Keyword <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>'))
+  tr = tr.append($('<th>').attr('data-sort', 'string').html('Address <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>'))
+  tr = tr.append($('<th>').attr('data-sort', 'int').html('Addr Prefix <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>'))
+  tr = tr.append($('<th>').attr('data-sort', 'string').html('Addr Type <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>'))
+  tr = tr.append($('<th>').attr('data-sort', 'string').html('Area <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>'))
+  tr = tr.append($('<th>').attr('data-sort', 'string').html('Country Code <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>'))
   tr = tr.append($('<th>').text('Flag'))
-  tr = tr.append($('<th>').attr('data-sort', 'string').text('Country Name'))
-  tr = tr.append($('<th>').attr('data-sort', 'string').text('Registry'))
+  tr = tr.append($('<th>').attr('data-sort', 'string').html('Country Name <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>'))
+  tr = tr.append($('<th>').attr('data-sort', 'string').html('Registry <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>'))
   return $('<thead>').append(tr)
 
 resultRows = (data) ->
@@ -94,24 +94,17 @@ keywordLink = (result_dl) ->
 
 keywordLinkClick = ->
   $('#keywordLinks > .keywordLink').click ->
+    console.log('aaaaaaaaaaa')
     point = $('[name=keywordPoint]:contains("' + $(this).text() + '")').offset().top
     $('html,body').animate({scrollTop: point}, 'fast')
 
 iptableDialog = ->
-  iptableDialogClick()
-  $('#iptable_dialog').dialog
-    autoOpen: false,
-    modal: false,
-    title: 'Command for iptables',
-    height: 300,
-    width: 550,
-    position: [50, 220]
-
-iptableDialogClick = ->
   $('#ipt_ipv4block').click ->
     command = ''
     $('#sirtable_body > tr').each ->
       if $(this).children('.col_type').text() == 'ipv4'
         command += "iptables -A INPUT -s #{$(this).children('.col_address').text()}/#{$(this).children('.col_prefix').text()} -j DROP ;\n"
-    $('#ipt_command').val(command)
-    $('#iptable_dialog').dialog('open')
+    $('#iptv4_command').val(command)
+    $('#iptables_ipv4_modal').modal('show')
+
+iptableDialogClick = ->

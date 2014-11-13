@@ -8,7 +8,6 @@ class Statistics::RecordsController < ApplicationController
     end
 
     @statistics_records = Statistics::Record.search(val)
-    Rails.logger.debug(@statistics_records)
 
     respond_to do |format|
       # format.html # index.html.erb

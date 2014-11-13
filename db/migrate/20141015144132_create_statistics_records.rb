@@ -11,8 +11,8 @@ class CreateStatisticsRecords < ActiveRecord::Migration
       t.string :date
       t.string :status, :null => false
       t.string :extensions
-      t.string :start_addr_dec
-      t.string :end_addr_dec
+      t.integer :start_addr_dec
+      t.integer :end_addr_dec
 
       t.timestamps
     end

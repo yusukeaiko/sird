@@ -17,6 +17,7 @@ class Statistics::Record < ActiveRecord::Base
       addrs = inaddr.split(',')
       addrs.each_index {|key| addrs[key].strip!}
       addrs.delete_if {|addr| addr.length == 0}
+      Rails.logger.debug("!! TEST !! :: #{addrs.to_s}")
       addrs.uniq.each {|addr|
         if check_ip(addr, 'ipv4') then
           row = searchAddr(addr, 'ipv4')
